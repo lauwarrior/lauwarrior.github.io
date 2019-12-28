@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    
+      <link rel="icon" href="/favicon.ico" />
+    
+
+    <title>
+        
+          001 第⼀周—学籍备案以及环境准备 - 信安之路学习纪录
+        
+    </title>
+
+    <!-- Spectre.css framework -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+    <!-- Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC" rel="stylesheet">
+    <!-- Noto Sans -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+
+    <!-- theme css & js -->
+    
+<link rel="stylesheet" href="/css/book.css">
+
+    
+<script src="/js/book.js"></script>
+
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zooming/2.1.1/zooming.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const zooming = new Zooming()
+    zooming.listen('img')
+})
+</script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/">信安之路学习纪录</a>
+  </h4>
+  <div class="sidebar-content">
+    <p>Dave’s Blog</p>
+<ul>
+<li><a href="/archives/index.html">00-文章归档</a></li>
+<li>01-信安小白计划
+<ul>
+<li>01-Web安全
+<ul>
+<li>[001 第⼀周_学籍备案以及环境准备](<a href="http://xn--01--rm0e73hm9t20as06mx00b/01-Web%E5%AE%89%E5%85%A8/001" target="_blank" rel="noopener">http://01-信安小白计划/01-Web安全/001</a> 第⼀周_学籍备案以及环境准备)</li>
+</ul>
+</li>
+<li>02-渗透测试
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>03-红蓝对抗
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>04-学二进制
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>05-病毒分析
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>06-安全建设
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>07-应急响应
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>08-成长经验
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>09-安全工具
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>02-靶机实战
+<ul>
+<li>01-VulnHub
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>03-Python学习
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>04-网络建站
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>05-kali学习
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>06-其他
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+
+<script src="/js/book-sidebar.js"></script>
+
+
+<script>
+collapse_sidebar(1)
+highlight_tab()
+show_sidebar()
+</script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/favicon.ico">
+  </section>
+  <section class="navbar-center">
+    信安之路学习纪录
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <p>Dave’s Blog</p>
+<ul>
+<li><a href="/archives/index.html">00-文章归档</a></li>
+<li>01-信安小白计划
+<ul>
+<li>01-Web安全
+<ul>
+<li>[001 第⼀周_学籍备案以及环境准备](<a href="http://xn--01--rm0e73hm9t20as06mx00b/01-Web%E5%AE%89%E5%85%A8/001" target="_blank" rel="noopener">http://01-信安小白计划/01-Web安全/001</a> 第⼀周_学籍备案以及环境准备)</li>
+</ul>
+</li>
+<li>02-渗透测试
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>03-红蓝对抗
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>04-学二进制
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>05-病毒分析
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>06-安全建设
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>07-应急响应
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>08-成长经验
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>09-安全工具
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>02-靶机实战
+<ul>
+<li>01-VulnHub
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>03-Python学习
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>04-网络建站
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>05-kali学习
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+<li>06-其他
+<ul>
+<li>暂未学习</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <p><strong>第⼀周环境准备任务</strong><br>
+**任务⽬标：**准备学习环境，学习 web 服务器的搭建过程，并做相应的加固学习<br>
+**电脑要求：**必须有⼀台⾃⼰的电脑，配置最好⾼⼀点，⾃⼰⽤着舒服就⾏<br>
+<strong>操作系统</strong>：主机不限制操作系统，需要安装虚拟机<br>
+**推荐环境：**linux+nginx+php-fpm +mysql（为后续搭建 nginx+lua 的 waf 做准备）<br>
+**报告要求：**将整个环境的搭建过程进⾏详细记录，收集⽹络上的加固⽂档，学习加固技术，从⽽思考不加固可能存在的安全问题，对于加固的过程以及对于安全的思考都需要做详细的记录。<br>
+最终⽬标：最终⽬标：能够运⾏ php 代码并且可以使⽤ php 连接 mysql，成功执⾏ mysql 的语句<br>
+拓展任务：拓展任务：除了这个 web 环境还有其他的环境可以搭建，能⼒强者可以做更多的练习，⽐如：基于 apache 的环境、基于 Windows server 的 iis 环境等；</p>
+<p><strong>第一周任务报告：</strong></p>
+<p>**电脑配置：**i7-4700MQ; 16G内存 ；NVIDIA GeForce GTX 770M</p>
+<p>**操作系统：**win10*64位系统 ；教育版 ；已安装VituralBox虚拟机</p>
+<pre><code>				基于 apache 的环境
+
+				基于 Windows ser ver 的 iis 环境
+</code></pre>
+<p>**环境搭建过程：**linux+nginx+php-fpm +mysql</p>
+<p><strong>一、linux系统搭建</strong></p>
+<pre><code>1、下载ubuntu-18.04-desktop-amd64.iso镜像，用VituralBox安装虚拟机
+
+		虚拟机配置内存2G、硬盘25G、1个CPU;
+
+2、开机后设置中文，并安装ubuntu，选择汉语；
+</code></pre>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564228100020-1577546370230.png" alt="1564228100020"></p>
+<p>3、清除硬盘并安装</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564228238354-1577546370230.png" alt="1564228238354"></p>
+<p>4、设置用户名密码</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564228422004-1577546370230.png" alt="1564228422004"></p>
+<p>5、启动后安装增强插件 实现自动缩放屏幕；</p>
+<pre><code>点击菜单栏的”设备“–&gt;安装增强功能；按照提示进行安装。安装完成后，重启系统。
+</code></pre>
+<p>6、安装ssh，以方便进行putty连接；</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564234076813-1577546370230.png" alt="1564234076813"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br><span class="line">sudo service ssh start</span><br><span class="line">sudo ps -e | grep ssh       #有 sshd，说明 ssh 服务已经启动</span><br><span class="line">sudo systemctl enable ssh   #设置自动启动ssh</span><br><span class="line">sudo apt install net-tools  #安装ifconfig命令</span><br></pre></td></tr></table></figure>
+<p>7、putty登陆；至此 ubuntu系统配置完成；使用桌面版的原因是，以后可以仅ubuntu系统里查看文件；</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564234084414-1577546370230.png" alt="1564234084414"></p>
+<p><strong>二、nginx配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br><span class="line">nginx -v  						#查看是否安装成功；显示版本则安装成功；</span><br></pre></td></tr></table></figure>
+<pre><code>	打开浏览器也显示安装成功；
+</code></pre>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564234567892-1577546370230.png" alt="1564234567892"></p>
+<p>搜索nginx后得知目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dave@dave-VirtualBox:~$ sudo find &#x2F; -name nginx</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;var&#x2F;log&#x2F;nginx								  	#存放日志目录</span><br><span class="line">&#x2F;var&#x2F;lib&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;logrotate.d&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;nginx										#存放配置文件目录								</span><br><span class="line">&#x2F;etc&#x2F;ufw&#x2F;applications.d&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;default&#x2F;nginx</span><br><span class="line">&#x2F;usr&#x2F;share&#x2F;doc&#x2F;nginx</span><br><span class="line">&#x2F;usr&#x2F;share&#x2F;nginx								#存放静态文件目录</span><br><span class="line">&#x2F;usr&#x2F;lib&#x2F;nginx</span><br><span class="line">&#x2F;usr&#x2F;sbin&#x2F;nginx									#主程序目录</span><br></pre></td></tr></table></figure>
+<p>三、安装php-fpm</p>
+<pre><code>网上安装命令
+
+（sudo apt-get install php7.2-mysql php7.2-fpm php7.2-curl php7.2-xml php7.2-gd php7.2-mbstring php-memcached php7.2-zip）
+</code></pre>
+<p>实际安装命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install php7.2 php7.2-fpm</span><br><span class="line"></span><br><span class="line">sudo vi &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default</span><br></pre></td></tr></table></figure>
+<p>Nginx默认服务器块文件如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80 default_server;</span><br><span class="line">    listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">    root &#x2F;var&#x2F;www&#x2F;html;</span><br><span class="line">    index index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">    server_name _;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        try_files $uri $uri&#x2F; &#x3D;404;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#按如下修改</p>
+<p>对当前文件进行几点更改：</p>
+<ul>
+<li>
+<p>首先，我们需要添加index.php作为index指令的第一个值，以便index.php在请求目录时提供命名的文件（如果可用）。</p>
+</li>
+<li>
+<p>我们可以修改server_name指令以指向我们服务器的域名或公共IP地址。</p>
+</li>
+<li>
+<p>对于实际的PHP处理，我们只需要通过从每行前面删除井号（＃）来取消注释处理PHP请求的文件段。这将是location<br>
+~.php$位置块，包含的fastcgi-php.conf代码段和与之关联的套接字php-fpm。</p>
+</li>
+<li>
+<p>我们还将.htaccess使用相同的方法取消注释处理文件的位置块。Nginx不处理这些文件。如果这些文件中的任何一个恰好进入文档根目录，则不应向访问者提供这些文件。</p>
+<p>更改在中标记的文本：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#   &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default  配置文件</span><br><span class="line">server &#123;</span><br><span class="line">listen 80 default_server;</span><br><span class="line">listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">root &#x2F;var&#x2F;www&#x2F;html;</span><br><span class="line"></span><br><span class="line">#这一行中添加了index.php</span><br><span class="line">index index.php index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">#此处修改你的域名，如果没有则不需要修改源文件</span><br><span class="line">server_name _;</span><br><span class="line"></span><br><span class="line">location &#x2F; &#123;</span><br><span class="line">try_files $uri $uri&#x2F; &#x3D;404;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#以下所有内容需要添加</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">include snippets&#x2F;fastcgi-php.conf;</span><br><span class="line">fastcgi_pass unix:&#x2F;run&#x2F;php&#x2F;php7.2-fpm.sock;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location ~ &#x2F;\.ht &#123;</span><br><span class="line">deny all;</span><br><span class="line">&#125;</span><br><span class="line">#以上所有内容需要添加 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>}</p>
+</blockquote>
+<p>检查ng的语法错误；nginx  -t</p>
+<p>这里大括号一定要配对，我在这里错了好几次，一直错误；</p>
+<p>cat /etc/php/7.2/fpm/pool.d/www.conf</p>
+<p>没有问题重启Nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl reload nginx</span><br></pre></td></tr></table></figure>
+<pre><code>确认 
+
+	配置文件/etc/php/7.2/fpm/pool.d/www.conf中
+
+	listen = /run/php/php7.2-fpm.sock
+
+配置好后重启nginx与php服务：
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ service nginx restart </span><br><span class="line">$ service php7.2-fpm restart</span><br></pre></td></tr></table></figure>
+<p>在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd 		&#x2F;var&#x2F;www&#x2F;html&#x2F;</span><br><span class="line"></span><br><span class="line">touch   info.php</span><br><span class="line"></span><br><span class="line">sudo vi info.php   #修改内容如下并：wq！保存；</span><br></pre></td></tr></table></figure>
+<p>如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>打开浏览器，打开127.0.0.1/info.php  #未出错后证明php配置成功；</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564742557109-1577546370230.png" alt="1564742557109"></p>
+<p>四、安装mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo  apt-get  install mysql-server mysql-client php7.2-mysql</span><br><span class="line">sudo  mysql_secure_installation  #配置sql</span><br><span class="line">systemctl status mysql.service   #测试mysql</span><br></pre></td></tr></table></figure>
+<p>配置DVWA；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;ethicalhack3r&#x2F;DVWA.git</span><br><span class="line">cp -r   &#x2F;DVWA  &#x2F;var&#x2F;www&#x2F;html&#x2F;DVWA&#x2F;</span><br><span class="line">cd &#x2F;var&#x2F;www&#x2F;html&#x2F;DVWA&#x2F;config&#x2F;</span><br><span class="line">cp  config.inc.php.dist config.inc.php.dist.cp</span><br><span class="line">mv config.inc.php.dist  config.inc.php</span><br><span class="line">sudo vi config.inc.php  #修改 </span><br><span class="line">						$_DVWA[ &#39;db_user&#39; ] &#x3D; &#39;root&#39;;</span><br><span class="line">						$_DVWA[ &#39;db_password&#39; ] &#x3D; &#39;p@ssw0rd&#39;;</span><br><span class="line">						$_DVWA[ &#39;db_database&#39; ] &#x3D; &#39;dvwa&#39;;</span><br><span class="line">保存后登陆127.0.0.1&#x2F;DVWA&#x2F;login.php  #报错，数据库连接不上；</span><br></pre></td></tr></table></figure>
+<p>安装过程中无添加用户密码过程，无法在DVWA中添加密码；</p>
+<p>修改密码过程；</p>
+<pre><code>mysql出现ERROR1698(28000):Access denied for user root@localhost错误
+
+因为安装的过程中没让设置密码，可能密码为空，但无论如何都进不去mysql。
+
+那么该怎么做呢，接下来就将这个解决方法总结记录一下。
+</code></pre>
+<p>**step1：**在ubuntu的terminal（也即终端）上输入sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf,进入到这个配置文件，然后在这个配置文件中的[mysqld]这一块中加入skip-grant-tables这句话。</p>
+<pre><code>**作用：**就是让你可以不用密码登录进去mysql。
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">#</span><br><span class="line"># * Basic Settings</span><br><span class="line">#</span><br><span class="line">user            　 &#x3D; mysql</span><br><span class="line">pid-file        　 &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.pid</span><br><span class="line">socket        　　 &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.sock</span><br><span class="line">port            　 &#x3D; 3306</span><br><span class="line">basedir        　　&#x3D; &#x2F;usr</span><br><span class="line">datadir       　　 &#x3D; &#x2F;var&#x2F;lib&#x2F;mysql</span><br><span class="line">tmpdir       　　　&#x3D; &#x2F;tmp</span><br><span class="line">lc-messages-dir   &#x3D; &#x2F;usr&#x2F;share&#x2F;mysql</span><br><span class="line">skip-external-locking</span><br><span class="line">character-set-server&#x3D;utf8</span><br><span class="line">collation-server&#x3D;utf8_general_ci</span><br><span class="line">skip-grant-tables　　　　&lt;-- add here</span><br></pre></td></tr></table></figure>
+<p><strong>保存:wq，退出</strong>。输入：service mysql restart，重新启动mysql。</p>
+<p>**step2：**在终端上输入mysql -u root -p，遇见输入密码的提示直接回车即可,进入mysql后，分别执行下面三句话：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 use mysql;   然后敲回车</span><br><span class="line">2 update user set authentication_string&#x3D;password(&quot;你的密码&quot;) where user&#x3D;&quot;root&quot;;  然后敲回车</span><br><span class="line">3 flush privileges;  然后敲回车</span><br><span class="line">4 quit   #退出mysql</span><br></pre></td></tr></table></figure>
+<p>再返回终端输入mysql -u root -p，应该就可以进入数据库了</p>
+<p>**step3：**重新进入到mysqld.cnf文件中去把刚开始加的skip-grant-tables这条语句给注释掉。</p>
+<pre><code>再返回终端输入mysql -u root -p，应该就可以进入数据库了。
+</code></pre>
+<p>**step4：**如果此时还是报出错误，那么就需要返回step3中，把注释掉的那条语句重新生效（就是删除#符号），重新进入mysql中，先选择一个数据库（use mysql;）,然后输入select user,plugin from user;</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1-1577546370230.png" alt="img"></p>
+<p>从图中可以看到在执行了select user,plugin from user;后，错误原因是因为plugin root的字段是auth_socket，那我们改掉它为下面的mysql_native_password就行了。</p>
+<p>从图中可以看到在执行了select user,plugin from user;后，错误原因是因为plugin root的字段是auth_socket，那我们改掉它为下面的mysql_native_password就行了。输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 update user set authentication_string&#x3D;password(&quot;ln122920&quot;),plugin&#x3D;&#39;mysql_native_password&#39; where user&#x3D;&#39;root&#39;;</span><br></pre></td></tr></table></figure>
+<p>然后回车执行以下，再输入select user,plugin from user;回车，我们能看到root用户的字段改成功了。</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/2-1577546370231.png" alt="img"></p>
+<p>最后quit退出。返回执行step3。</p>
+<p>那么这个问题就完全解决了。</p>
+<p>修改后DVWA 正常显示</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564798356318-1577546370231.png" alt="1564798356318"></p>
+<hr>
+<p><strong>拓展</strong></p>
+<p>mysql修改用户密码的方法及命令</p>
+<p><strong>方法1：</strong> 用SET PASSWORD命令<br>
+首先登录MySQL。<br>
+格式：mysql&gt; set password for 用户名@localhost = password(‘新密码’);<br>
+例子：mysql&gt; set password for root@localhost = password(‘123’);</p>
+<p>**方法2：**用mysqladmin<br>
+格式：mysqladmin -u用户名 -p旧密码 password 新密码<br>
+例子：mysqladmin -uroot -p123456 password 123</p>
+<p>**方法3：**用UPDATE直接编辑user表<br>
+首先登录MySQL。<br>
+mysql&gt; use mysql;<br>
+mysql&gt; update user set password=password(‘123’) where user=‘root’ and host=‘localhost’;<br>
+mysql&gt; flush privileges;</p>
+<p>**方法4：**在忘记root密码的时候，可以这样<br>
+以windows为例：</p>
+<ol>
+<li>关闭正在运行的MySQL服务。</li>
+<li>打开DOS窗口，转到mysql\bin目录。</li>
+<li>输入mysqld --skip-grant-tables 回车。–skip-grant-tables 的意思是启动MySQL服务的时候跳过权限表认证。</li>
+<li>再开一个DOS窗口（因为刚才那个DOS窗口已经不能动了），转到mysql\bin目录。</li>
+<li>输入mysql回车，如果成功，将出现MySQL提示符 &gt;。</li>
+<li>连接权限数据库： use mysql; 。</li>
+<li>改密码：update user set password=password(“123”) where user=“root”;（别忘了最后加分号） 。</li>
+<li>刷新权限（必须步骤）：flush privileges;　。</li>
+<li>退出 quit。</li>
+<li>注销系统，再进入，使用用户名root和刚才设置的新密码123登录。</li>
+</ol>
+<p>linux系统：</p>
+<pre><code>**step1：**在ubuntu的terminal（也即终端）上输入sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf,进入到这个配置文件，然后在这个配置文件中的[mysqld]这一块中加入skip-grant-tables这句话。
+
+**step2：**在终端上输入mysql -u root -p，遇见输入密码的提示直接回车即可,进入mysql后，分别执行下面三句话：
+
+**step3：**重新进入到mysqld.cnf文件中去把刚开始加的skip-grant-tables这条语句给注释掉。
+
+**step4：**如果此时还是报出错误，那么就需要返回step3中，把注释掉的那条语句重新生效（就是删除#符号），重新进入mysql中，先选择一个数据库（use mysql;）,然后输入
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select user,plugin from user;</span><br><span class="line"></span><br><span class="line">update user set authentication_string&#x3D;password(&quot;ln122920&quot;),plugin&#x3D;&#39;mysql_native_password&#39; where user&#x3D;&#39;root&#39;;</span><br></pre></td></tr></table></figure>
+<pre><code>最后quit退出。返回执行step3。
+</code></pre>
+<hr>
+<p><strong>建议学习内容：windows service 2008 安装</strong></p>
+<p>1、MSDN网站下载cn_windows_server_2008_r2_hpc_edition_with_service_pack_1_x64_dvd_700632.iso</p>
+<p>2、进行虚拟机安装；</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564401206724-1577546370231.png" alt="1564401206724"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402145246-1577546370231.png" alt="1564402145246"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402509461-1577546370231.png" alt="1564402509461"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402572590-1577546370231.png" alt="1564402572590"></p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402707096-1577546370231.png" alt="1564402707096"></p>
+<p>3、显示IIS7 就已经搭建成功；</p>
+<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402858433-1577546370231.png" alt="1564402858433"></p>
+
+</div>
+
+
+  <div class="book-comments">
+    
+
+
+
+
+  </div>
+
+
+
+<script src="/js/book-post.js"></script>
+
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
