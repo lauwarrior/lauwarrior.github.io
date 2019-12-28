@@ -11,7 +11,7 @@
 
     <title>
         
-          001 第⼀周—学籍备案以及环境准备 - 信安之路学习纪录
+          001_第⼀周—学籍备案以及环境准备 - 信安之路学习纪录
         
     </title>
 
@@ -293,24 +293,24 @@ show_sidebar()
 
 2、开机后设置中文，并安装ubuntu，选择汉语；
 </code></pre>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564228100020-1577546370230.png" alt="1564228100020"></p>
+<p><img src="/.io//1564228100020-1577546370230.png" alt="1564228100020"></p>
 <p>3、清除硬盘并安装</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564228238354-1577546370230.png" alt="1564228238354"></p>
+<p><img src="/.io//1564228238354-1577546370230.png" alt="1564228238354"></p>
 <p>4、设置用户名密码</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564228422004-1577546370230.png" alt="1564228422004"></p>
+<p><img src="/.io//1564228422004-1577546370230.png" alt="1564228422004"></p>
 <p>5、启动后安装增强插件 实现自动缩放屏幕；</p>
 <pre><code>点击菜单栏的”设备“–&gt;安装增强功能；按照提示进行安装。安装完成后，重启系统。
 </code></pre>
 <p>6、安装ssh，以方便进行putty连接；</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564234076813-1577546370230.png" alt="1564234076813"></p>
+<p><img src="/.io//1564234076813-1577546370230.png" alt="1564234076813"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br><span class="line">sudo service ssh start</span><br><span class="line">sudo ps -e | grep ssh       #有 sshd，说明 ssh 服务已经启动</span><br><span class="line">sudo systemctl enable ssh   #设置自动启动ssh</span><br><span class="line">sudo apt install net-tools  #安装ifconfig命令</span><br></pre></td></tr></table></figure>
 <p>7、putty登陆；至此 ubuntu系统配置完成；使用桌面版的原因是，以后可以仅ubuntu系统里查看文件；</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564234084414-1577546370230.png" alt="1564234084414"></p>
+<p><img src="/.io//1564234084414-1577546370230.png" alt="1564234084414"></p>
 <p><strong>二、nginx配置</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br><span class="line">nginx -v  						#查看是否安装成功；显示版本则安装成功；</span><br></pre></td></tr></table></figure>
 <pre><code>	打开浏览器也显示安装成功；
 </code></pre>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564234567892-1577546370230.png" alt="1564234567892"></p>
+<p><img src="/.io//1564234567892-1577546370230.png" alt="1564234567892"></p>
 <p>搜索nginx后得知目录：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dave@dave-VirtualBox:~$ sudo find &#x2F; -name nginx</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;var&#x2F;log&#x2F;nginx								  	#存放日志目录</span><br><span class="line">&#x2F;var&#x2F;lib&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;logrotate.d&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;nginx										#存放配置文件目录								</span><br><span class="line">&#x2F;etc&#x2F;ufw&#x2F;applications.d&#x2F;nginx</span><br><span class="line">&#x2F;etc&#x2F;default&#x2F;nginx</span><br><span class="line">&#x2F;usr&#x2F;share&#x2F;doc&#x2F;nginx</span><br><span class="line">&#x2F;usr&#x2F;share&#x2F;nginx								#存放静态文件目录</span><br><span class="line">&#x2F;usr&#x2F;lib&#x2F;nginx</span><br><span class="line">&#x2F;usr&#x2F;sbin&#x2F;nginx									#主程序目录</span><br></pre></td></tr></table></figure>
@@ -366,7 +366,7 @@ show_sidebar()
 <p>如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 <p>打开浏览器，打开127.0.0.1/info.php  #未出错后证明php配置成功；</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564742557109-1577546370230.png" alt="1564742557109"></p>
+<p><img src="/.io//1564742557109-1577546370230.png" alt="1564742557109"></p>
 <p>四、安装mysql</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo  apt-get  install mysql-server mysql-client php7.2-mysql</span><br><span class="line">sudo  mysql_secure_installation  #配置sql</span><br><span class="line">systemctl status mysql.service   #测试mysql</span><br></pre></td></tr></table></figure>
 <p>配置DVWA；</p>
@@ -391,16 +391,16 @@ show_sidebar()
 <pre><code>再返回终端输入mysql -u root -p，应该就可以进入数据库了。
 </code></pre>
 <p>**step4：**如果此时还是报出错误，那么就需要返回step3中，把注释掉的那条语句重新生效（就是删除#符号），重新进入mysql中，先选择一个数据库（use mysql;）,然后输入select user,plugin from user;</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1-1577546370230.png" alt="img"></p>
+<p><img src="/.io//1-1577546370230.png" alt="img"></p>
 <p>从图中可以看到在执行了select user,plugin from user;后，错误原因是因为plugin root的字段是auth_socket，那我们改掉它为下面的mysql_native_password就行了。</p>
 <p>从图中可以看到在执行了select user,plugin from user;后，错误原因是因为plugin root的字段是auth_socket，那我们改掉它为下面的mysql_native_password就行了。输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 update user set authentication_string&#x3D;password(&quot;ln122920&quot;),plugin&#x3D;&#39;mysql_native_password&#39; where user&#x3D;&#39;root&#39;;</span><br></pre></td></tr></table></figure>
 <p>然后回车执行以下，再输入select user,plugin from user;回车，我们能看到root用户的字段改成功了。</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/2-1577546370231.png" alt="img"></p>
+<p><img src="/.io//2-1577546370231.png" alt="img"></p>
 <p>最后quit退出。返回执行step3。</p>
 <p>那么这个问题就完全解决了。</p>
 <p>修改后DVWA 正常显示</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564798356318-1577546370231.png" alt="1564798356318"></p>
+<p><img src="/.io//1564798356318-1577546370231.png" alt="1564798356318"></p>
 <hr>
 <p><strong>拓展</strong></p>
 <p>mysql修改用户密码的方法及命令</p>
@@ -446,13 +446,13 @@ mysql&gt; flush privileges;</p>
 <p><strong>建议学习内容：windows service 2008 安装</strong></p>
 <p>1、MSDN网站下载cn_windows_server_2008_r2_hpc_edition_with_service_pack_1_x64_dvd_700632.iso</p>
 <p>2、进行虚拟机安装；</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564401206724-1577546370231.png" alt="1564401206724"></p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402145246-1577546370231.png" alt="1564402145246"></p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402509461-1577546370231.png" alt="1564402509461"></p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402572590-1577546370231.png" alt="1564402572590"></p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402707096-1577546370231.png" alt="1564402707096"></p>
+<p><img src="/.io//1564401206724-1577546370231.png" alt="1564401206724"></p>
+<p><img src="/.io//1564402145246-1577546370231.png" alt="1564402145246"></p>
+<p><img src="/.io//1564402509461-1577546370231.png" alt="1564402509461"></p>
+<p><img src="/.io//1564402572590-1577546370231.png" alt="1564402572590"></p>
+<p><img src="/.io//1564402707096-1577546370231.png" alt="1564402707096"></p>
 <p>3、显示IIS7 就已经搭建成功；</p>
-<p><img src="/01-%E4%BF%A1%E5%AE%89%E5%B0%8F%E7%99%BD%E8%AE%A1%E5%88%92/01-Web%E5%AE%89%E5%85%A8/001_%E7%AC%AC%E2%BC%80%E5%91%A8_%E5%AD%A6%E7%B1%8D%E5%A4%87%E6%A1%88%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/1564402858433-1577546370231.png" alt="1564402858433"></p>
+<p><img src="/.io//1564402858433-1577546370231.png" alt="1564402858433"></p>
 
 </div>
 
